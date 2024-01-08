@@ -1,0 +1,53 @@
+{
+	"loginPage": {
+		"title": "Đăng nhập",
+		"rememberMe": "Ghi nhớ đăng nhập"
+	},
+	"homePage": {
+		"title": "hello"
+	},
+	"action": {
+		"login": "Đăng nhập"
+	},
+	"label": {
+		"email": "Email",
+		"password": "Mật khẩu"
+	},
+	"placeholder": {
+		"email": "example@example.com",
+		"password": "••••••••••••"
+	},
+	"error": {
+		"requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
+		"invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ.",
+		"requiredPassword": "Vui lòng nhập mật khẩu của bạn.",
+		"invalidPassword": "Mật khẩu phải có ít nhất 8 ký tự và bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt."
+	},
+	"localeSwitcher": {
+		"en": "Tiếng Anh",
+		"vi": "Tiếng Việt"
+	},
+	"sidebar": {
+		"groups": {
+			"activity": "Hoạt động",
+			"administration": "Quản trị hệ thống",
+			"setting": "Cài đặt"
+		},
+		"items": {
+			"dashboard": "Bảng điều khiển",
+			"events": "Sự kiện",
+			"campaigns": "Chiến dịch",
+			"data": "Dữ liệu",
+			"tempDataPage1": "Data tạm 1",
+			"tempDataPage2": "Data tạm 2",
+			"reports": "Báo cáo",
+			"tempReportPage": "Báo cáo tạm",
+			"companies": "Công ty",
+			"accounts": "Tài khoản",
+			"roles": "Vai trò",
+			"permissions": "Phân quyền",
+			"languages": "Ngôn ngữ",
+			"configurations": "Cấu hình"
+		}
+	}
+}
