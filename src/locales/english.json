@@ -1,70 +1,73 @@
 {
-	"loginPage": {
-		"title": "Login",
-		"rememberMe": "Remember me"
-	},
-	"homePage": {
-		"title": "hello"
-	},
-	"rolesPage": {
-		"table": {
-			"name": "Name",
-			"code": "Code",
-			"status": "Status"
-		}
-	},
-	"action": {
-		"login": "Login",
-		"delete": "Delete",
-		"cancel": "Cancel"
-	},
-	"label": {
-		"email": "Email Address",
-		"password": "Password"
-	},
-	"placeholder": {
-		"email": "example@example.com",
-		"password": "••••••••••••"
-	},
-	"error": {
-		"requiredEmail": "Please enter your email address.",
-		"invalidEmail": "Please enter valid email address.",
-		"requiredPassword": "Please enter your password.",
-		"invalidPassword": "Password must be at least 8 characters and include uppercase, lowercase, number, and special character."
-	},
-	"errorApi": {
-		"LOGIN_FAILED": "Login failed.",
-		"USER_NAME_OR_PASSWORD_INCORRECT": "Email or password is incorrect."
-	},
-	"localeSwitcher": {
-		"en": "English",
-		"vi": "Vietnamese"
-	},
-	"sidebar": {
-		"groups": {
-			"activity": "Activity",
-			"administration": "Administration",
-			"setting": "Setting"
-		},
-		"items": {
-			"dashboard": "Dashboard",
-			"events": "Events",
-			"campaigns": "Campaigns",
-			"data": "Data",
-			"tempDataPage1": "Temp Data Page 1",
-			"tempDataPage2": "Temp Data Page 2",
-			"reports": "Reports",
-			"tempReportPage": "Temp Report Page",
-			"companies": "Companies",
-			"accounts": "Accounts",
-			"roles": "Roles",
-			"permissions": "Permissions",
-			"languages": "Languages",
-			"configurations": "Configurations"
-		}
-	},
-	"deleteRolePopover": {
-		"title": "Delete Role",
-		"description": "Are you sure you want to delete it?"
-	}
+  "loginPage": {
+    "title": "Login",
+    "rememberMe": "Remember me"
+  },
+  "homePage": {
+    "title": "hello"
+  },
+  "rolesPage": {
+    "title": "Roles",
+    "table": {
+      "name": "Name",
+      "code": "Code",
+      "status": "Status"
+    }
+  },
+  "action": {
+    "login": "Login",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "create": "Create"
+  },
+  "label": {
+    "email": "Email Address",
+    "password": "Password",
+    "active": "Active"
+  },
+  "placeholder": {
+    "email": "example@example.com",
+    "password": "••••••••••••"
+  },
+  "error": {
+    "requiredEmail": "Please enter your email address.",
+    "invalidEmail": "Please enter valid email address.",
+    "requiredPassword": "Please enter your password.",
+    "invalidPassword": "Password must be at least 8 characters and include uppercase, lowercase, number, and special character."
+  },
+  "errorApi": {
+    "LOGIN_FAILED": "Login failed.",
+    "USER_NAME_OR_PASSWORD_INCORRECT": "Email or password is incorrect."
+  },
+  "localeSwitcher": {
+    "en": "English",
+    "vi": "Vietnamese"
+  },
+  "sidebar": {
+    "groups": {
+      "activity": "Activity",
+      "administration": "Administration",
+      "setting": "Setting"
+    },
+    "items": {
+      "dashboard": "Dashboard",
+      "events": "Events",
+      "campaigns": "Campaigns",
+      "data": "Data",
+      "tempDataPage1": "Temp Data Page 1",
+      "tempDataPage2": "Temp Data Page 2",
+      "reports": "Reports",
+      "tempReportPage": "Temp Report Page",
+      "companies": "Companies",
+      "accounts": "Accounts",
+      "roles": "Roles",
+      "permissions": "Permissions",
+      "languages": "Languages",
+      "configurations": "Configurations"
+    }
+  },
+  "deleteRolePopover": {
+    "title": "Delete Role",
+    "description": "Are you sure you want to delete it?"
+  }
 }
