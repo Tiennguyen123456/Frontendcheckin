@@ -6,8 +6,17 @@
 	"homePage": {
 		"title": "hello"
 	},
+	"rolesPage": {
+		"table": {
+			"name": "Name",
+			"code": "Code",
+			"status": "Status"
+		}
+	},
 	"action": {
-		"login": "Đăng nhập"
+		"login": "Đăng nhập",
+		"delete": "Delete",
+		"cancel": "Cancel"
 	},
 	"label": {
 		"email": "Email",
@@ -22,6 +31,10 @@
 		"invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ.",
 		"requiredPassword": "Vui lòng nhập mật khẩu của bạn.",
 		"invalidPassword": "Mật khẩu phải có ít nhất 8 ký tự và bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt."
+	},
+	"errorApi": {
+		"LOGIN_FAILED": "Đăng nhập thất bại.",
+		"USER_NAME_OR_PASSWORD_INCORRECT": "Email hoặc mật khẩu không đúng."
 	},
 	"localeSwitcher": {
 		"en": "Tiếng Anh",
@@ -49,5 +62,9 @@
 			"languages": "Ngôn ngữ",
 			"configurations": "Cấu hình"
 		}
+	},
+	"deleteRolePopover": {
+		"title": "Delete Role",
+		"description": "Are you sure you want to delete it?"
 	}
 }

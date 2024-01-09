@@ -8,6 +8,7 @@ import CustomSideBar from "../../../components/layout/SideBar";
 import TopBar from "../../../components/layout/TopBar";
 import { DeviceType } from "../../../constants/enum";
 import { changeDeviceType } from "../../../redux/common/slice";
+import { getProfile } from "../../../redux/user/actions";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
 	const dispatch = useAppDispatch();
@@ -30,6 +31,11 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 		handleChangeDeviceType();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [screenWidth]);
+
+	useEffect(() => {
+		dispatch(getProfile());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Box className="flex h-dvh overflow-hidden">

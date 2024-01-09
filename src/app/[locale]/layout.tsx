@@ -14,24 +14,25 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+	// ** I18n
 	const locale = useLocale();
 	const messages = useMessages();
 
 	return (
-		<ClerkProvider>
-			<html lang={locale}>
-				<head>
-					<title>Check-in Dashboard</title>
-				</head>
+		<NextIntlClientProvider locale={locale} messages={messages}>
+			<ClerkProvider>
+				<html lang={locale}>
+					<head>
+						<title>Check-in Dashboard</title>
+					</head>
 
-				<ThemeRegistry>
-					<body className={roboto.className}>
-						<NextIntlClientProvider messages={messages}>
+					<ThemeRegistry>
+						<body className={roboto.className}>
 							<Provider>{children}</Provider>
-						</NextIntlClientProvider>
-					</body>
-				</ThemeRegistry>
-			</html>
-		</ClerkProvider>
+						</body>
+					</ThemeRegistry>
+				</html>
+			</ClerkProvider>
+		</NextIntlClientProvider>
 	);
 }

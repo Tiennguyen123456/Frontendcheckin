@@ -13,6 +13,10 @@ import LocaleSwitcherSelect from "@/components/common/Select/LocaleSwitcherSelec
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "../../../../constants/routes";
+import authApi from "../../../../services/auth-api";
+import { useState } from "react";
+import { setAxiosAuthorization } from "../../../../configs/axios.config";
+import { toastError } from "../../../../utils/toast";
 
 const { yupResolver } = require("@hookform/resolvers/yup");
 
@@ -25,6 +29,9 @@ type LoginFormValue = {
 };
 
 const LoginPage = (props: Props) => {
+	// ** State
+	const [loading, setLoading] = useState(false);
+
 	// ** I18n
 	const translation = useTranslations();
 
@@ -37,10 +44,8 @@ const LoginPage = (props: Props) => {
 			.string()
 			.required(translation("error.requiredEmail"))
 			.matches(emailRegex, translation("error.invalidEmail")),
-		password: yup
-			.string()
-			.required(translation("error.requiredPassword"))
-			.matches(passwordRegex, translation("error.invalidPassword")),
+		password: yup.string().required(translation("error.requiredPassword")),
+		// .matches(passwordRegex, translation("error.invalidPassword")),
 		rememberMe: yup.boolean().notRequired(),
 	});
 
@@ -59,12 +64,28 @@ const LoginPage = (props: Props) => {
 	});
 
 	// ** Functions
-	const handleLogin = (values: LoginFormValue) => {
+	const handleLogin = async (values: LoginFormValue) => {
 		try {
-			console.log("values: ", values);
-			Cookies.set("authorization", "fake_token");
+			setLoading(true);
+			const response = await authApi.login({
+				email: values.email,
+				password: values.password,
+			});
+
+			if (response.data.status === "success") {
+				Cookies.set("authorization", response.data.data.access_token);
+				setAxiosAuthorization(response.data.data.access_token);
+			}
 			router.push(ROUTES.DASHBOARD);
-		} catch (error) {
+			setLoading(false);
+		} catch (error: any) {
+			const data = error?.response?.data;
+			if (data?.message_code) {
+				toastError(translation(`errorApi.${data?.message_code}`));
+			} else {
+				toastError(translation("errorApi.LOGIN_FAILED"));
+			}
+			setLoading(false);
 			console.log("error: ", error);
 		}
 	};
@@ -142,7 +163,9 @@ const LoginPage = (props: Props) => {
 							)}
 						/>
 
-						<StyledPrimaryButton type="submit">{translation("action.login")}</StyledPrimaryButton>
+						<StyledPrimaryButton loading={loading} loadingPosition="start" type="submit">
+							{translation("action.login")}
+						</StyledPrimaryButton>
 					</StyledForm>
 				</div>
 			</div>

@@ -17,6 +17,7 @@ import LocaleSwitcherSelect from "../common/Select/LocaleSwitcherSelect";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "../../constants/routes";
+import { selectUser } from "../../redux/user/slice";
 
 type Props = {};
 
@@ -24,6 +25,7 @@ const TopBar = (props: Props) => {
 	// ** Redux
 	const dispatch = useAppDispatch();
 	const { isSideBarCollapse, deviceType } = useAppSelector(selectCommon);
+	const { userProfile } = useAppSelector(selectUser);
 
 	// ** State
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -84,8 +86,8 @@ const TopBar = (props: Props) => {
 						aria-haspopup="true"
 						aria-expanded={open ? "true" : undefined}
 					>
-						<Avatar className="!h-8 !w-8" />
-						<span className="hidden md:block">Võ Xuân Tú</span>
+						<Avatar className="!h-8 !w-8" src={userProfile?.avatar_path} />
+						<span className="hidden md:block">{userProfile?.name || "Guest"}</span>
 					</Box>
 				</Box>
 			</Toolbar>

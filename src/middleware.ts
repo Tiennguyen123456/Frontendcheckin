@@ -1,9 +1,9 @@
+import { authMiddleware } from "@clerk/nextjs";
 import createMiddleware from "next-intl/middleware";
+import { NextResponse } from "next/server";
 import { Languages } from "./constants/enum";
-import { locales } from "./i18n-configurations/config";
-import { NextRequest, NextResponse } from "next/server";
 import { PRIVATE_ROUTES, ROUTES } from "./constants/routes";
-import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
+import { locales } from "./i18n-configurations/config";
 
 const intlMiddleware = createMiddleware({
 	// A list of all locales that are supported
@@ -31,7 +31,6 @@ export default authMiddleware({
 		}
 
 		const cookie = req.cookies.get("authorization");
-		console.log("cookie: ", cookie);
 
 		if (!cookie?.value && checkIfStringStartsWith(pathname, PRIVATE_ROUTES)) {
 			return NextResponse.redirect(new URL(ROUTES.LOGIN, req.url));

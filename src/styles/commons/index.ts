@@ -2,7 +2,7 @@
 import styled from "@emotion/styled";
 import { LoadingButton } from "@mui/lab";
 import { themeColors } from "../../theme/theme";
-import { Box } from "@mui/material";
+import { Box, Chip, Popover } from "@mui/material";
 
 export const StyledPrimaryButton = styled(LoadingButton)`
 	background-color: ${(props) => props.sx?.backgroundColor || themeColors.colors.blackRgba87};
@@ -97,4 +97,39 @@ export const StyledSeePassword = styled(Box)`
 	svg {
 		color: ${themeColors.colors.blackRgba60};
 	}
+`;
+export const StyledChip = styled(Chip)`
+	background-color: ${themeColors.colors.blackRgba08};
+	color: ${themeColors.colors.black000};
+	&.active {
+		background-color: ${themeColors.colors.green2E7};
+		color: ${themeColors.colors.whiteFFF};
+	}
+`;
+export const StyledActionGroup = styled(Box)`
+	display: flex;
+	align-items: center;
+	column-gap: 8px;
+	.MuiButtonBase-root {
+		padding: 4px;
+		.MuiSvgIcon-root {
+			width: 22px;
+			height: 22px;
+		}
+	}
+`;
+export const StyledPopover = styled(Popover)`
+	& .MuiPaper-root {
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	}
+`;
+export const StyledPageContent = styled(Box)`
+	width: 100%;
+	height: 100%;
+
+	padding: 24px 48px 32px 24px;
+	background-color: ${themeColors.colors.grayF2F};
+
+	overflow-x: hidden;
+	overflow-y: auto;
 `;

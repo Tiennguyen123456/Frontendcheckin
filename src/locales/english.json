@@ -6,8 +6,17 @@
 	"homePage": {
 		"title": "hello"
 	},
+	"rolesPage": {
+		"table": {
+			"name": "Name",
+			"code": "Code",
+			"status": "Status"
+		}
+	},
 	"action": {
-		"login": "Login"
+		"login": "Login",
+		"delete": "Delete",
+		"cancel": "Cancel"
 	},
 	"label": {
 		"email": "Email Address",
@@ -22,6 +31,10 @@
 		"invalidEmail": "Please enter valid email address.",
 		"requiredPassword": "Please enter your password.",
 		"invalidPassword": "Password must be at least 8 characters and include uppercase, lowercase, number, and special character."
+	},
+	"errorApi": {
+		"LOGIN_FAILED": "Login failed.",
+		"USER_NAME_OR_PASSWORD_INCORRECT": "Email or password is incorrect."
 	},
 	"localeSwitcher": {
 		"en": "English",
@@ -49,5 +62,9 @@
 			"languages": "Languages",
 			"configurations": "Configurations"
 		}
+	},
+	"deleteRolePopover": {
+		"title": "Delete Role",
+		"description": "Are you sure you want to delete it?"
 	}
 }

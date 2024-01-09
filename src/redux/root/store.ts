@@ -1,10 +1,12 @@
 "use client";
 import { configureStore } from "@reduxjs/toolkit";
 import commonSlice from "../common/slice";
+import userSlice from "../user/slice";
 
 export const store = configureStore({
 	reducer: {
 		common: commonSlice,
+		user: userSlice,
 	},
 });
 
