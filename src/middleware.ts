@@ -15,8 +15,21 @@ const intlMiddleware = createMiddleware({
   localePrefix: "as-needed",
 });
 
-function checkIfStringStartsWith(str: string, arr: string[]) {
-  return arr.some((substr) => str.startsWith(substr));
+function isMatchPrivateRoute(path: string) {
+  let newPath = path;
+
+  for (let i = 0; i < locales.length; i++) {
+    const locale = locales[i];
+    if (path.startsWith(`/${locale}`)) {
+      const splitPath = path.split(`/${locale}`);
+      if (splitPath.length > 1) {
+        newPath = splitPath[1];
+        break;
+      }
+    }
+  }
+
+  return PRIVATE_ROUTES.some((substr) => newPath.startsWith(substr));
 }
 
 export default authMiddleware({
@@ -30,15 +43,15 @@ export default authMiddleware({
       return NextResponse.redirect(new URL(ROUTES.DASHBOARD, req.url));
     }
 
-    // const cookie = req.cookies.get("authorization");
+    const cookie = req.cookies.get("authorization");
 
-    // if (!cookie?.value && checkIfStringStartsWith(pathname, PRIVATE_ROUTES)) {
-    // 	return NextResponse.redirect(new URL(ROUTES.LOGIN, req.url));
-    // }
+    if (!cookie?.value && isMatchPrivateRoute(pathname)) {
+      return NextResponse.redirect(new URL(ROUTES.LOGIN, req.url));
+    }
 
-    // if (cookie?.value && !checkIfStringStartsWith(pathname, PRIVATE_ROUTES)) {
-    // 	return NextResponse.redirect(new URL(ROUTES.DASHBOARD, req.url));
-    // }
+    if (cookie?.value && !isMatchPrivateRoute(pathname)) {
+      return NextResponse.redirect(new URL(ROUTES.DASHBOARD, req.url));
+    }
 
     return NextResponse.next();
   },
@@ -46,6 +59,5 @@ export default authMiddleware({
 
 export const config = {
   // Match only internationalized pathnames
-  // matcher: ["/((?!api|_next|.*\\..*).*)"],
   matcher: "/((?!api|_next/static|_next/image|images|favicon.ico).*)",
 };

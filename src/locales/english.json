@@ -37,7 +37,8 @@
   },
   "errorApi": {
     "LOGIN_FAILED": "Login failed.",
-    "USER_NAME_OR_PASSWORD_INCORRECT": "Email or password is incorrect."
+    "USER_NAME_OR_PASSWORD_INCORRECT": "Email or password is incorrect.",
+    "GET_USER_PROFILE_FAILED": "Get user profile failed."
   },
   "localeSwitcher": {
     "en": "English",

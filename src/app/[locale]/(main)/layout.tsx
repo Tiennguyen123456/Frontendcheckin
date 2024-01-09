@@ -9,13 +9,21 @@ import TopBar from "../../../components/layout/TopBar";
 import { DeviceType } from "../../../constants/enum";
 import { changeDeviceType, selectCommon } from "../../../redux/common/slice";
 import { getProfile } from "../../../redux/user/actions";
+import { toastError } from "../../../utils/toast";
+import { useTranslations } from "next-intl";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
+  // ** Redux
   const dispatch = useAppDispatch();
   const { isSideBarCollapse } = useAppSelector(selectCommon);
 
+  // ** I18n
+  const translation = useTranslations();
+
+  // ** Custom Hook
   let screenWidth = useWindowSize();
 
+  // ** Functions
   const handleChangeDeviceType = () => {
     if (screenWidth) {
       if (screenWidth < ScreenWidth.sm) {
@@ -28,13 +36,27 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     }
   };
 
+  const handleGetUserProfile = async () => {
+    try {
+      await dispatch(getProfile()).unwrap();
+    } catch (error: any) {
+      console.log("error: ", error);
+      const data = error?.response?.data;
+      if (data?.message_code) {
+        toastError(translation(`errorApi.${data?.message_code}`));
+      } else {
+        toastError(translation("errorApi.GET_USER_PROFILE_FAILED"));
+      }
+    }
+  };
+
   useEffect(() => {
     handleChangeDeviceType();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenWidth]);
 
   useEffect(() => {
-    dispatch(getProfile());
+    handleGetUserProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -7,17 +7,17 @@
     "title": "hello"
   },
   "rolesPage": {
-    "title": "Roles",
+    "title": "Vai trò",
     "table": {
-      "name": "Name",
+      "name": "Tên",
       "code": "Code",
-      "status": "Status"
+      "status": "Trạng thái"
     }
   },
   "action": {
     "login": "Đăng nhập",
-    "delete": "Delete",
-    "cancel": "Cancel",
+    "delete": "Xóa",
+    "cancel": "Hủy",
     "create": "Tạo mới"
   },
   "label": {
@@ -67,7 +67,7 @@
     }
   },
   "deleteRolePopover": {
-    "title": "Delete Role",
-    "description": "Are you sure you want to delete it?"
+    "title": "Xóa Vai Trò",
+    "description": "Bạn có chắc chắn là bạn muốn xóa nó không?"
   }
 }

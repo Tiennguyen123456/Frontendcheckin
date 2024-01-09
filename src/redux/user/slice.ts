@@ -5,22 +5,26 @@ import { RootState } from "../root/store";
 import { getProfile } from "./actions";
 
 export interface UserState {
-	userProfile: IUserProfile | undefined;
+  userProfile: IUserProfile | null;
 }
 
 const initialState: UserState = {
-	userProfile: undefined,
+  userProfile: null,
 };
 
 export const userSlice = createSlice({
-	name: "user",
-	initialState,
-	reducers: {},
-	extraReducers(builder) {
-		builder.addCase(getProfile.fulfilled, (state, action: PayloadAction<IUserProfile>) => {
-			state.userProfile = action.payload;
-		});
-	},
+  name: "user",
+  initialState,
+  reducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(getProfile.fulfilled, (state, action: PayloadAction<IUserProfile>) => {
+        state.userProfile = action.payload;
+      })
+      .addCase(getProfile.rejected, (state) => {
+        state.userProfile = null;
+      });
+  },
 });
 
 // Action creators are generated for each case reducer function
