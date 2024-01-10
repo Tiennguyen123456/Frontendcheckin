@@ -1,37 +1,40 @@
 "use client";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import EventNoteIcon from "@mui/icons-material/EventNote";
+import MonitorIcon from "@mui/icons-material/Monitor";
+import UpcomingIcon from "@mui/icons-material/Upcoming";
+import Callout from "../../../../components/common/Callout";
 import HeadContent from "../../../../components/common/HeadContent";
-import SelectField from "../../../../components/common/Select";
 import { StyledContentWrapper } from "../../../../styles/commons";
-import { useState } from "react";
+
+import clsx from "clsx";
+import { useTranslations } from "next-intl";
+import DemoChart from "../../../../components/common/ReactApexChart/demo";
 
 type Props = {};
 
 const Dashboard = (props: Props) => {
-  const [selected, setSelected] = useState<any>();
+  // ** I18n
+  const translation = useTranslations();
 
   return (
     <div className="p-3">
       <HeadContent title="Dashboard"></HeadContent>
 
       <StyledContentWrapper>
-        <SelectField
-          label="hello"
-          onChange={(value) => setSelected(value)}
-          value={selected}
-          error
-          helperText="he"
-          options={[
-            {
-              label: "hello",
-              value: "hello",
-            },
-            {
-              label: "hi",
-              value: "hi",
-            },
-          ]}
-        />
+        <div className={clsx("grid gap-y-3 gap-x-3 md:flex md:flex-wrap lg:grid-cols-3")}>
+          <Callout icon={<MonitorIcon />} title={`${translation("callOut.totalEvent")} : 100`} />
+          <Callout icon={<EventNoteIcon />} title={`${translation("callOut.eventTakingPlace")} : 100`} />
+          <Callout icon={<UpcomingIcon />} title={`${translation("callOut.upcomingEvent")} : 100`} />
+        </div>
+      </StyledContentWrapper>
+
+      <StyledContentWrapper className="mt-5">
+        <div className={clsx("grid gap-x-3 lg:grid-cols-2")}>
+          <div>
+            <DemoChart />
+          </div>
+          <div></div>
+        </div>
       </StyledContentWrapper>
     </div>
   );

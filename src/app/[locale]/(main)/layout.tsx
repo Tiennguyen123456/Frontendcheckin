@@ -71,7 +71,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         }`}
       >
         <Toolbar />
-        {children}
+        <div className="h-[calc(100%-56px)] overflow-y-auto">{children}</div>
       </Box>
     </Box>
   );

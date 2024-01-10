@@ -92,5 +92,11 @@
   "deleteRolePopover": {
     "title": "Delete Role",
     "description": "Are you sure you want to delete it?"
+  },
+  "callOut": {
+    "totalEvent": "Total Event",
+    "eventTakingPlace": "Event taking place",
+    "upcomingEvent": "Upcoming Event",
+    "subtitle": "Select gear to configure"
   }
 }
