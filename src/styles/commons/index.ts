@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import { LoadingButton } from "@mui/lab";
 import { themeColors } from "../../theme/theme";
 import { Box, Button, Chip, Popover } from "@mui/material";
-import { ISecondaryButton } from "../../models/Button";
 
 export const StyledPrimaryButton = styled(LoadingButton)`
   background-color: ${(props) => props.sx?.backgroundColor || themeColors.colors.blackRgba87};

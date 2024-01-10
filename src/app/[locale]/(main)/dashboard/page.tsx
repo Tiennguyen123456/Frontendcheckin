@@ -1,12 +1,15 @@
+import React from "react";
+import Breadcrumbs from "../../../../components/common/Breadcrumbs";
 
-import React from 'react'
-
-type Props = {}
+type Props = {};
 
 const Dashboard = (props: Props) => {
   return (
-    <div>Dashboard</div>
-  )
-}
+    <div>
+      <Breadcrumbs />
+      Dashboard
+    </div>
+  );
+};
 
 export default Dashboard;
