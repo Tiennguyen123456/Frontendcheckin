@@ -1,16 +1,27 @@
 "use client";
 import styled from "@emotion/styled";
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import React, { ReactNode } from "react";
 import { themeColors } from "../../../theme/theme";
 import Breadcrumbs from "../Breadcrumbs";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useRouter } from "next/navigation";
 
 type Props = {
   title: string;
   children?: ReactNode;
+  hasBackBtn?: boolean;
 };
 
-const HeadContent = ({ title, children }: Props) => {
+const HeadContent = ({ title, children, hasBackBtn = false }: Props) => {
+  // ** Router
+  const router = useRouter();
+
+  // ** Functions
+  const handleBack = () => {
+    router.back();
+  };
+
   return (
     <div>
       <div className="mr-5 mb-4">
@@ -19,7 +30,15 @@ const HeadContent = ({ title, children }: Props) => {
 
       <StyledHeadContent>
         <div className="flex justify-between items-center">
-          <span className="font-semibold text-xl">{title}</span>
+          <div className="flex items-center gap-x-2">
+            {hasBackBtn && (
+              <IconButton onClick={handleBack}>
+                <ArrowBackIcon fontSize="small" />
+              </IconButton>
+            )}
+
+            <span className="font-semibold text-xl">{title}</span>
+          </div>
 
           <div>{children}</div>
         </div>
