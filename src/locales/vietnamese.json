@@ -1,70 +1,73 @@
 {
-	"loginPage": {
-		"title": "Đăng nhập",
-		"rememberMe": "Ghi nhớ đăng nhập"
-	},
-	"homePage": {
-		"title": "hello"
-	},
-	"rolesPage": {
-		"table": {
-			"name": "Name",
-			"code": "Code",
-			"status": "Status"
-		}
-	},
-	"action": {
-		"login": "Đăng nhập",
-		"delete": "Delete",
-		"cancel": "Cancel"
-	},
-	"label": {
-		"email": "Email",
-		"password": "Mật khẩu"
-	},
-	"placeholder": {
-		"email": "example@example.com",
-		"password": "••••••••••••"
-	},
-	"error": {
-		"requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
-		"invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ.",
-		"requiredPassword": "Vui lòng nhập mật khẩu của bạn.",
-		"invalidPassword": "Mật khẩu phải có ít nhất 8 ký tự và bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt."
-	},
-	"errorApi": {
-		"LOGIN_FAILED": "Đăng nhập thất bại.",
-		"USER_NAME_OR_PASSWORD_INCORRECT": "Email hoặc mật khẩu không đúng."
-	},
-	"localeSwitcher": {
-		"en": "Tiếng Anh",
-		"vi": "Tiếng Việt"
-	},
-	"sidebar": {
-		"groups": {
-			"activity": "Hoạt động",
-			"administration": "Quản trị hệ thống",
-			"setting": "Cài đặt"
-		},
-		"items": {
-			"dashboard": "Bảng điều khiển",
-			"events": "Sự kiện",
-			"campaigns": "Chiến dịch",
-			"data": "Dữ liệu",
-			"tempDataPage1": "Data tạm 1",
-			"tempDataPage2": "Data tạm 2",
-			"reports": "Báo cáo",
-			"tempReportPage": "Báo cáo tạm",
-			"companies": "Công ty",
-			"accounts": "Tài khoản",
-			"roles": "Vai trò",
-			"permissions": "Phân quyền",
-			"languages": "Ngôn ngữ",
-			"configurations": "Cấu hình"
-		}
-	},
-	"deleteRolePopover": {
-		"title": "Delete Role",
-		"description": "Are you sure you want to delete it?"
-	}
+  "loginPage": {
+    "title": "Đăng nhập",
+    "rememberMe": "Ghi nhớ đăng nhập"
+  },
+  "homePage": {
+    "title": "hello"
+  },
+  "rolesPage": {
+    "title": "Vai trò",
+    "table": {
+      "name": "Tên",
+      "code": "Code",
+      "status": "Trạng thái"
+    }
+  },
+  "action": {
+    "login": "Đăng nhập",
+    "delete": "Xóa",
+    "cancel": "Hủy",
+    "create": "Tạo mới"
+  },
+  "label": {
+    "email": "Email",
+    "password": "Mật khẩu",
+    "active": "Kích hoạt"
+  },
+  "placeholder": {
+    "email": "example@example.com",
+    "password": "••••••••••••"
+  },
+  "error": {
+    "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
+    "invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ.",
+    "requiredPassword": "Vui lòng nhập mật khẩu của bạn.",
+    "invalidPassword": "Mật khẩu phải có ít nhất 8 ký tự và bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt."
+  },
+  "errorApi": {
+    "LOGIN_FAILED": "Đăng nhập thất bại.",
+    "USER_NAME_OR_PASSWORD_INCORRECT": "Email hoặc mật khẩu không đúng."
+  },
+  "localeSwitcher": {
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt"
+  },
+  "sidebar": {
+    "groups": {
+      "activity": "Hoạt động",
+      "administration": "Quản trị hệ thống",
+      "setting": "Cài đặt"
+    },
+    "items": {
+      "dashboard": "Bảng điều khiển",
+      "events": "Sự kiện",
+      "campaigns": "Chiến dịch",
+      "data": "Dữ liệu",
+      "tempDataPage1": "Data tạm 1",
+      "tempDataPage2": "Data tạm 2",
+      "reports": "Báo cáo",
+      "tempReportPage": "Báo cáo tạm",
+      "companies": "Công ty",
+      "accounts": "Tài khoản",
+      "roles": "Vai trò",
+      "permissions": "Phân quyền",
+      "languages": "Ngôn ngữ",
+      "configurations": "Cấu hình"
+    }
+  },
+  "deleteRolePopover": {
+    "title": "Xóa Vai Trò",
+    "description": "Bạn có chắc chắn là bạn muốn xóa nó không?"
+  }
 }

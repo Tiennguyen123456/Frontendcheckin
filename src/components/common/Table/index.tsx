@@ -1,6 +1,6 @@
-import theme, { themeColors } from '@/theme/theme';
-import styled from '@emotion/styled';
-import { DataGrid, GridColDef, GridColumnMenu } from '@mui/x-data-grid';
+import theme, { themeColors } from "@/theme/theme";
+import styled from "@emotion/styled";
+import { DataGrid, GridColDef, GridColumnMenu } from "@mui/x-data-grid";
 
 type Props = {
   dataTable: any;
@@ -60,26 +60,26 @@ const Table = ({
         rowHeight={rowHeight}
         onPaginationModelChange={(data) => {
           if (dataTable.paginationModel.pageSize !== data.pageSize) {
-            onChangeTable('paginationModel', {
+            onChangeTable("paginationModel", {
               page: 0,
               pageSize: data.pageSize,
             });
           } else {
-            onChangeTable('paginationModel', data);
+            onChangeTable("paginationModel", data);
           }
         }}
         onSortModelChange={(data) => {
-          onChangeTable('paginationModel', {
+          onChangeTable("paginationModel", {
             page: 0,
             pageSize: 10,
           });
-          onChangeTable('sortModel', data);
+          onChangeTable("sortModel", data);
         }}
         onRowSelectionModelChange={
           disableSelectionOnClick
             ? () => {}
             : (data) => {
-                onChangeTable('rowSelectionModel', data);
+                onChangeTable("rowSelectionModel", data);
               }
         }
         loading={loading}
@@ -92,7 +92,6 @@ export default Table;
 
 // Styled
 const StyledTableDataGrid = styled(DataGrid)`
-  margin: 16px -16px 0;
   border: 0;
   background-color: ${themeColors.colors.whiteFFF};
   height: auto;
@@ -142,7 +141,4 @@ const StyledTableDataGrid = styled(DataGrid)`
 `;
 const StyledTableWrapper = styled.div`
   width: 100%;
-  flex: 1;
-  position: relative;
-  display: flex;
 `;
