@@ -192,7 +192,7 @@ const RolesPage = (props: Props) => {
             <Grid container gap={2} alignItems="end">
               <Grid item xs={4}>
                 <Input
-                  label="Search"
+                  label={translation("label.search")}
                   placeholder={"Name, Code"}
                   value={dataTable.search}
                   onChange={(search) => handleTableChange("search", search)}

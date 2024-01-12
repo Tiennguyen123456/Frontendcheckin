@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { LoadingButton } from "@mui/lab";
 import { themeColors } from "../../theme/theme";
 import { Box, Button, Chip, MenuItem, Popover } from "@mui/material";
+import Link from "next/link";
 
 export const StyledPrimaryButton = styled(LoadingButton)`
   background-color: ${(props) => props.sx?.backgroundColor || themeColors.colors.blackRgba87};
@@ -130,6 +131,19 @@ export const StyledChip = styled.div`
     background-color: #fff7e6;
     color: #fa8c16;
     border-color: #ffd591;
+  }
+`;
+export const StyledChipTag = styled(Chip)`
+  background-color: ${themeColors.colors.green2E7}20;
+  color: ${themeColors.colors.green2E7};
+  height: auto;
+`;
+export const StyledLink = styled(Link)`
+  color: ${themeColors.colors.blue219};
+  text-decoration: none;
+  font-weight: 500;
+  &:hover {
+    text-decoration: underline;
   }
 `;
 export const StyledActionGroup = styled(Box)`

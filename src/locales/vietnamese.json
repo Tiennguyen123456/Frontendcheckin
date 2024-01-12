@@ -34,6 +34,16 @@
       }
     }
   },
+  "accountPage": {
+    "title": "Tài khoản",
+    "table": {
+      "name": "Tên tài khoản",
+      "email": "Email",
+      "role": "Tên vai trò",
+      "createdAt": "Ngày tạo",
+      "status": "Trạng thái"
+    }
+  },
   "eventsPage": {
     "title": "Sự kiện",
     "table": {
@@ -54,13 +64,23 @@
     "edit": "Cập nhật"
   },
   "label": {
+    "search": "Tìm kiếm",
     "email": "Email",
     "password": "Mật khẩu",
-    "active": "Kích hoạt"
+    "active": "Kích hoạt",
+    "notAvailable": "Không tồn tại",
+    "role": "Vai trò",
+    "status": "Trạng thái",
+    "name": "Tên",
+    "username": "Tên đăng nhập"
   },
   "placeholder": {
     "email": "example@example.com",
-    "password": "••••••••••••"
+    "password": "••••••••••••",
+    "role": "Vai trò",
+    "status": "Trạng thái",
+    "name": "Tên",
+    "username": "Tên đăng nhập"
   },
   "error": {
     "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
@@ -71,7 +91,15 @@
   "errorApi": {
     "LOGIN_FAILED": "Đăng nhập thất bại.",
     "USER_NAME_OR_PASSWORD_INCORRECT": "Email hoặc mật khẩu không đúng.",
-    "GET_USER_PROFILE_FAILED": "Lấy thông tin người dùng thất bại."
+    "GET_USER_PROFILE_FAILED": "Lấy thông tin người dùng thất bại.",
+    "CREATE_ACCOUNT_FAILED": "Tạo mới tài khoản thất bại.",
+    "UPDATE_ACCOUNT_FAILED": "Chỉnh sửa tài khoản thất bại.",
+    "DELETE_ACCOUNT_FAILED": "Xoá tài khoản thất bại."
+  },
+  "successApi": {
+    "CREATE_ACCOUNT_SUCCESS": "Tạo mới tài khoản thành công.",
+    "UPDATE_ACCOUNT_SUCCESS": "Chỉnh sửa tài khoản thành công.",
+    "DELETE_ACCOUNT_SUCCESS": "Xoá tài khoản thành công."
   },
   "localeSwitcher": {
     "en": "Tiếng Anh",

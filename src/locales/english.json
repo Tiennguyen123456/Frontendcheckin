@@ -34,6 +34,16 @@
       }
     }
   },
+  "accountPage": {
+    "title": "Account",
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "createdAt": "Created at",
+      "status": "Status"
+    }
+  },
   "eventsPage": {
     "title": "Events",
     "table": {
@@ -54,13 +64,23 @@
     "edit": "Edit"
   },
   "label": {
+    "search": "Search",
     "email": "Email Address",
     "password": "Password",
-    "active": "Active"
+    "active": "Active",
+    "notAvailable": "Not Available",
+    "role": "Role",
+    "status": "Status",
+    "name": "Name",
+    "username": "Username"
   },
   "placeholder": {
     "email": "example@example.com",
-    "password": "••••••••••••"
+    "password": "••••••••••••",
+    "role": "Role",
+    "status": "Status",
+    "name": "Name",
+    "username": "Username"
   },
   "error": {
     "requiredEmail": "Please enter your email address.",
@@ -71,7 +91,15 @@
   "errorApi": {
     "LOGIN_FAILED": "Login failed.",
     "USER_NAME_OR_PASSWORD_INCORRECT": "Email or password is incorrect.",
-    "GET_USER_PROFILE_FAILED": "Get user profile failed."
+    "GET_USER_PROFILE_FAILED": "Get user profile failed.",
+    "CREATE_ACCOUNT_FAILED": "Create account failed.",
+    "UPDATE_ACCOUNT_FAILED": "Update account failed.",
+    "DELETE_ACCOUNT_FAILED": "Delete account failed."
+  },
+  "successApi": {
+    "CREATE_ACCOUNT_SUCCESS": "Create account success.",
+    "UPDATE_ACCOUNT_SUCCESS": "Update account success.",
+    "DELETE_ACCOUNT_SUCCESS": "Delete account success."
   },
   "localeSwitcher": {
     "en": "English",
