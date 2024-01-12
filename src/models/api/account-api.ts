@@ -1,23 +1,19 @@
-export interface IUserProfile {
+export interface IAccountRes {
   id: number;
+  company_id: number;
+  event_id: number;
   is_admin: boolean;
   expire_date: string;
   name: string;
   username: string;
   email: string;
+  email_verified_at: string;
   type: string;
-  gate: any;
+  gate: string;
   avatar_path: string;
-  note: any;
+  note: string;
   status: string;
-  created_by: string;
-  updated_by: string;
-  last_login_at: string;
   created_at: string;
   updated_at: string;
-  company_id: number;
-  event_id: number;
-  roles: {
-    [x: string]: string[];
-  };
+  last_login_at: string;
 }

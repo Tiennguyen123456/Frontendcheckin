@@ -14,6 +14,9 @@ const ApiRoutes = {
   getPermissionsFromRole: baseURL + "/permissions/role/",
   updatePermissions: baseURL + "/permission/assign",
   revokePermissions: baseURL + "/permission/revoke/",
+
+  // ** Account Routes
+  getUsers: baseURL + "/users",
 };
 
 export default ApiRoutes;
