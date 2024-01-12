@@ -34,6 +34,17 @@
       }
     }
   },
+  "eventsPage": {
+    "title": "Events",
+    "table": {
+      "name": "Event Name",
+      "code": "Event Code",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "numberOfGuest": "Number Of Guest",
+      "status": "Status"
+    }
+  },
   "action": {
     "login": "Login",
     "delete": "Delete",

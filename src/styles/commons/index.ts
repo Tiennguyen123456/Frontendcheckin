@@ -106,23 +106,27 @@ export const StyledChip = styled.div`
   border-radius: 4px;
 
   &.active,
-  &.green {
+  &.green,
+  &.event-done {
     background-color: #b7eb8f3d;
     color: #52c41a;
     border-color: #52c41a;
   }
 
-  &.red {
+  &.red,
+  &.event-cancel {
     background-color: #fff1f0;
     color: #f5222d;
     border-color: #ffa39e;
   }
-  &.blue {
+  &.blue,
+  &.event-active {
     background-color: #e6f7ff;
     color: #1890ff;
     border-color: #91d5ff;
   }
-  &.orange {
+  &.orange,
+  &.event-inactive {
     background-color: #fff7e6;
     color: #fa8c16;
     border-color: #ffd591;
