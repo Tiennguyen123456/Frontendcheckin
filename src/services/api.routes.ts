@@ -9,6 +9,7 @@ const ApiRoutes = {
 
   // ** Authority Routes
   getRoles: baseURL + "/roles",
+  storeRole: baseURL + "/role/store",
   getPermissions: baseURL + "/permissions",
   getPermissionsFromRole: baseURL + "/permissions/role/",
   updatePermissions: baseURL + "/permission/assign",

@@ -23,36 +23,23 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Input from "../../../../components/common/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import AutoComplete from "../../../../components/common/AutoComplete";
+import authorityApi from "@/services/authority-api";
+import { IRoleRes } from "@/models/api/authority-api";
+import RoleModal from "@/components/modal/RoleModal";
 
 type Props = {};
 
-type RoleRow = {
-  id: number;
-  code: string;
-  name: string;
-  enabled: boolean;
+const sortKeys = {
+  title: "name",
 };
 
-interface IRoleDataTable extends IDataTable<RoleRow> {
-  enabled: any;
+interface IRoleDataTable extends IDataTable<IRoleRes> {
+  enable: any;
 }
 
-const roles: RoleRow[] = [
-  {
-    id: 1,
-    code: "ROLE_ADMIN",
-    enabled: false,
-    name: "Admin",
-  },
-  {
-    id: 2,
-    code: "ROLE_MEMBER",
-    enabled: true,
-    name: "Member",
-  },
-];
-
 const RolesPage = (props: Props) => {
+  const [showRoleModal, setShowRoleModel] = useState(false);
+  const [selectedRow, setSelectedRow] = useState();
   // ** I18n
   const translation = useTranslations();
 
@@ -60,34 +47,34 @@ const RolesPage = (props: Props) => {
   const [loadingTable, setLoadingTable] = useState(false);
   const [dataTable, setDataTable] = useState<IRoleDataTable>({
     search: "",
-    list: roles,
+    list: [],
     totalItems: 0,
     paginationModel: {
-      page: 0,
-      pageSize: 10,
+      limit: 0,
+      paginate: 10,
     },
     pageSizeOptions: [10, 20, 50, 100],
     sortModel: [],
     rowSelectionModel: [],
-    enabled: {},
+    enable: {},
   });
 
   const columns: GridColDef[] = [
     {
-      field: "code",
+      field: "name",
       headerName: translation("rolesPage.table.name"),
       minWidth: 200,
       flex: 1,
     },
     {
-      field: "name",
-      headerName: translation("rolesPage.table.code"),
+      field: "guard_name",
+      headerName: translation("rolesPage.table.guardName"),
       sortable: false,
       minWidth: 250,
       flex: 1,
     },
     {
-      field: "enabled",
+      field: "enable",
       headerName: translation("rolesPage.table.status"),
       minWidth: 100,
       headerAlign: "center",
@@ -106,7 +93,7 @@ const RolesPage = (props: Props) => {
       sortable: false,
       renderCell: ({ row }) => (
         <StyledActionGroup>
-          <IconButton aria-label="edit">
+          <IconButton aria-label="edit" onClick={() => handleEditRole(row)}>
             <EditIcon sx={{ color: themeColors.colors.blue219 }} />
           </IconButton>
           <ConfirmPopover
@@ -131,49 +118,61 @@ const RolesPage = (props: Props) => {
       setLoadingTable(true);
 
       let modalSearch: any = {
-        page: dataTable.paginationModel.page + 1,
-        size: dataTable.paginationModel.pageSize,
+        limit: dataTable.paginationModel.limit + 1,
+        paginate: dataTable.paginationModel.paginate,
       };
 
-      if (dataTable.search) {
-        modalSearch["search"] = dataTable.search;
-      }
+      // if (dataTable.search) {
+      //   modalSearch["search"] = dataTable.search;
+      // }
 
-      if (dataTable.enabled?.value !== null && dataTable.enabled?.value !== undefined) {
-        modalSearch["enabled"] = dataTable.enabled.value;
-      }
+      // if (dataTable.enabled?.value !== null && dataTable.enabled?.value !== undefined) {
+      //   modalSearch["enabled"] = dataTable.enabled.value;
+      // }
 
       // if (dataTable.sortModel.length > 0) {
-      // 	modalSearch["sort"] = sortKeys[dataTable.sortModel?.[0]?.field];
-      // 	modalSearch["sortType"] = dataTable.sortModel?.[0]?.sort.toUpperCase();
+      //   modalSearch["orderByColumn"] = sortKeys[dataTable.sortModel?.[0]?.field];
+      //   modalSearch["orderByDesc"] = dataTable.sortModel?.[0]?.sort.toUpperCase();
       // }
 
-      // const response = await getAuthorityListService(modalSearch);
-      // if (response.data.success) {
-      // 	const { result_info } = response.data;
-      // 	setDataTable({
-      // 		...dataTable,
-      // 		list: result_info?.results,
-      // 		totalItems: result_info?.total_items,
-      // 	});
-      // 	setLoadingTable(false);
-      // }
+      const response = await authorityApi.getRolesWithParams(modalSearch);
+      if (response) {
+        setDataTable({
+          ...dataTable,
+          list: response?.collection,
+          totalItems: response?.pagination?.meta?.total,
+        });
+        setLoadingTable(false);
+      }
     } catch (error) {
       setLoadingTable(false);
       console.log("error: ", error);
     }
   };
 
+  const handleEditRole = (role: any) => {
+    setSelectedRow(role);
+    handleShowRoleModal();
+  };
+
+  const handleShowRoleModal = () => {
+    setShowRoleModel(true);
+  };
+
+  const handleCloseRowModal = () => {
+    setSelectedRow(undefined);
+    setShowRoleModel(false);
+  };
+
   useEffect(() => {
-    // handleFetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    handleFetchData();
   }, [dataTable.paginationModel, dataTable.sortModel]);
 
   return (
     <div className="p-3">
       <HeadContent title={translation("rolesPage.title")}>
         <div className="flex gap-x-3">
-          <StyledPrimaryButton size="small" startIcon={<AddIcon />}>
+          <StyledPrimaryButton size="small" startIcon={<AddIcon />} onClick={handleShowRoleModal}>
             {translation("action.create")}
           </StyledPrimaryButton>
           <StyledSecondaryButton
@@ -201,12 +200,12 @@ const RolesPage = (props: Props) => {
               <Grid item xs={2.5}>
                 <AutoComplete
                   label={translation("label.active")}
-                  value={dataTable.enabled}
+                  value={dataTable.enable}
                   options={[
                     { label: "Active", value: true },
                     { label: "Inactive", value: false },
                   ]}
-                  onChange={(data) => handleTableChange("enabled", data)}
+                  onChange={(data) => handleTableChange("enable", data)}
                 />
               </Grid>
               <Grid item xs={1}>
@@ -227,6 +226,8 @@ const RolesPage = (props: Props) => {
           onChangeTable={handleTableChange}
           loading={loadingTable}
         />
+
+        <RoleModal show={showRoleModal} onClose={handleCloseRowModal} onRefetch={handleFetchData} role={selectedRow} />
       </StyledContentWrapper>
     </div>
   );
