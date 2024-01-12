@@ -5,8 +5,8 @@ export interface IDataTable<T> {
   list: T[];
   totalItems: number;
   paginationModel: {
-    page: number;
-    pageSize: number;
+    limit: number;
+    paginate: number;
   };
   pageSizeOptions: number[];
   sortModel: GridSortModel;

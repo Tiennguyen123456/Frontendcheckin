@@ -13,3 +13,11 @@ declare interface IPermissionResponse {
   message: string;
   data: string[];
 }
+
+declare interface IRoleResponse {
+  status: string;
+  status_code: number;
+  message_code: string;
+  message: string;
+  data: string[];
+}

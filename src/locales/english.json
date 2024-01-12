@@ -11,14 +11,36 @@
     "table": {
       "name": "Name",
       "code": "Code",
-      "status": "Status"
+      "status": "Status",
+      "guardName": "Guard name"
+    },
+    "action": {
+      "CREATE_ROLE_SUCCESS": "Create role success.",
+      "UPDATE_ROLE_SUCCESS": "Update role success.",
+      "DELETE_ROLE_SUCCESS": "Delete role success.",
+      "CREATE_ROLE_FAILED": "Create role failed.",
+      "UPDATE_ROLE_FAILED": "Update role failed.",
+      "DELETE_ROLE_FAILED": "Delete role failed."
+    },
+    "roleModal": {
+      "active": "Active",
+      "label": {
+        "name": "Name",
+        "guardName": "Guard name"
+      },
+      "placeholder": {
+        "name": "Name",
+        "guardName": "Guard name"
+      }
     }
   },
   "action": {
     "login": "Login",
     "delete": "Delete",
     "cancel": "Cancel",
-    "create": "Create"
+    "create": "Create",
+    "save": "Save",
+    "edit": "Edit"
   },
   "label": {
     "email": "Email Address",

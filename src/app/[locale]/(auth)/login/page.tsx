@@ -67,18 +67,18 @@ const LoginPage = (props: Props) => {
   const handleLogin = async (values: LoginFormValue) => {
     try {
       setLoading(true);
-      // const response = await authApi.login({
-      // 	email: values.email,
-      // 	password: values.password,
-      // });
-      const response = {
-        data: {
-          status: "success",
-          data: {
-            access_token: "fake token",
-          },
-        },
-      };
+      const response = await authApi.login({
+        email: values.email,
+        password: values.password,
+      });
+      // const response = {
+      //   data: {
+      //     status: "success",
+      //     data: {
+      //       access_token: "fake token",
+      //     },
+      //   },
+      // };
 
       if (response.data.status === "success") {
         Cookies.set("authorization", response.data.data.access_token);
