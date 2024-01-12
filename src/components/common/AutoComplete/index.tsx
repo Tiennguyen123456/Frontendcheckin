@@ -2,6 +2,8 @@ import { themeColors } from "@/theme/theme";
 import styled from "@emotion/styled";
 import { Autocomplete, FormControl, FormHelperText, InputLabel } from "@mui/material";
 import Input from "../TextField";
+import { StyledLabel } from "../../../styles/commons";
+import clsx from "clsx";
 
 type Props = {
   label?: string;
@@ -34,7 +36,7 @@ function AutoComplete({
 }: Props) {
   return (
     <StyledFormControl fullWidth error={error}>
-      {label && <span className="mb-2">{label}</span>}
+      {label && <StyledLabel className={clsx("mb-2", isRequired && "field-required")}>{label}</StyledLabel>}
 
       <StyledAutocomplete
         className={`${error ? "has-error" : ""} ${isRequired ? "field-required" : ""} ${noBorder ? "no-border" : ""}`}

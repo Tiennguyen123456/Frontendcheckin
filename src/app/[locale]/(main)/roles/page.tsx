@@ -26,6 +26,7 @@ import AutoComplete from "../../../../components/common/AutoComplete";
 import authorityApi from "@/services/authority-api";
 import { IRoleRes } from "@/models/api/authority-api";
 import RoleModal from "@/components/modal/RoleModal";
+import Breadcrumbs from "../../../../components/common/Breadcrumbs";
 
 type Props = {};
 
@@ -81,7 +82,7 @@ const RolesPage = (props: Props) => {
       align: "center",
       sortable: false,
       renderCell: (params) => {
-        return <StyledChip className={params.value ? "active" : ""} label={params.value ? "Active" : "Inactive"} />;
+        return <StyledChip className={params.value ? "active" : ""}>{params.value ? "Active" : "Inactive"}</StyledChip>;
       },
     },
     {
@@ -170,7 +171,7 @@ const RolesPage = (props: Props) => {
 
   return (
     <div className="p-3">
-      <HeadContent title={translation("rolesPage.title")}>
+      <HeadContent hasBackBtn title={translation("rolesPage.title")}>
         <div className="flex gap-x-3">
           <StyledPrimaryButton size="small" startIcon={<AddIcon />} onClick={handleShowRoleModal}>
             {translation("action.create")}

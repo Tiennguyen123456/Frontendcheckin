@@ -34,6 +34,17 @@
       }
     }
   },
+  "eventsPage": {
+    "title": "Sự kiện",
+    "table": {
+      "name": "Tên sự kiện",
+      "code": "Mã sự kiện",
+      "startDate": "Ngày bắt đầu",
+      "endDate": "Ngày kết thúc",
+      "numberOfGuest": "Số lượng khách",
+      "status": "Trạng thái"
+    }
+  },
   "action": {
     "login": "Đăng nhập",
     "delete": "Xóa",
@@ -59,7 +70,8 @@
   },
   "errorApi": {
     "LOGIN_FAILED": "Đăng nhập thất bại.",
-    "USER_NAME_OR_PASSWORD_INCORRECT": "Email hoặc mật khẩu không đúng."
+    "USER_NAME_OR_PASSWORD_INCORRECT": "Email hoặc mật khẩu không đúng.",
+    "GET_USER_PROFILE_FAILED": "Lấy thông tin người dùng thất bại."
   },
   "localeSwitcher": {
     "en": "Tiếng Anh",
@@ -91,5 +103,11 @@
   "deleteRolePopover": {
     "title": "Xóa Vai Trò",
     "description": "Bạn có chắc chắn là bạn muốn xóa nó không?"
+  },
+  "callOut": {
+    "totalEvent": "Tổng sự kiện",
+    "eventTakingPlace": "Sự kiện đang diễn ra",
+    "upcomingEvent": "Sự kiện sắp diễn ra",
+    "subtitle": "Chọn bánh răng để cấu hình"
   }
 }

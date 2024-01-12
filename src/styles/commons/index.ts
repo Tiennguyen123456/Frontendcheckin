@@ -2,8 +2,7 @@
 import styled from "@emotion/styled";
 import { LoadingButton } from "@mui/lab";
 import { themeColors } from "../../theme/theme";
-import { Box, Button, Chip, Popover } from "@mui/material";
-import { ISecondaryButton } from "../../models/Button";
+import { Box, Button, Chip, MenuItem, Popover } from "@mui/material";
 
 export const StyledPrimaryButton = styled(LoadingButton)`
   background-color: ${(props) => props.sx?.backgroundColor || themeColors.colors.blackRgba87};
@@ -99,12 +98,38 @@ export const StyledSeePassword = styled(Box)`
     color: ${themeColors.colors.blackRgba60};
   }
 `;
-export const StyledChip = styled(Chip)`
-  background-color: ${themeColors.colors.blackRgba08};
-  color: ${themeColors.colors.black000};
-  &.active {
-    background-color: ${themeColors.colors.green2E7};
-    color: ${themeColors.colors.whiteFFF};
+export const StyledChip = styled.div`
+  background-color: ${themeColors.colors.grayFAF};
+  color: ${themeColors.colors.blackRgba87};
+  padding: 1px 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+
+  &.active,
+  &.green,
+  &.event-done {
+    background-color: #b7eb8f3d;
+    color: #52c41a;
+    border-color: #52c41a;
+  }
+
+  &.red,
+  &.event-cancel {
+    background-color: #fff1f0;
+    color: #f5222d;
+    border-color: #ffa39e;
+  }
+  &.blue,
+  &.event-active {
+    background-color: #e6f7ff;
+    color: #1890ff;
+    border-color: #91d5ff;
+  }
+  &.orange,
+  &.event-inactive {
+    background-color: #fff7e6;
+    color: #fa8c16;
+    border-color: #ffd591;
   }
 `;
 export const StyledActionGroup = styled(Box)`
@@ -158,5 +183,42 @@ export const StyledIconBtn = styled(Button)`
     opacity: 0.8;
     background-color: ${themeColors.colors.whiteFFF};
     border-color: ${themeColors.colors.blackRgba87};
+  }
+`;
+export const StyledMenuItem = styled(MenuItem)`
+  &:not(:last-child) {
+    margin-bottom: 4px;
+  }
+  &.Mui-selected {
+    background-color: ${themeColors.colors.grayD2D};
+    color: ${themeColors.colors.black000};
+  }
+  &:hover {
+    background-color: ${themeColors.colors.blackRgba08};
+
+    &.Mui-selected {
+      background-color: ${themeColors.colors.grayD2D} !important;
+    }
+  }
+  &.active {
+    border-radius: 4px;
+    background-color: ${themeColors.colors.blackRgba08};
+    font-weight: 500;
+    color: ${themeColors.colors.black000};
+  }
+  span {
+    font-weight: 600;
+    padding-right: 12px;
+  }
+`;
+export const StyledLabel = styled.span`
+  &.required-field {
+    &:after {
+      content: "*";
+      color: ${themeColors.colors.redD32};
+      font-size: 20px;
+      line-height: 30px;
+      display: inline-block;
+    }
   }
 `;
