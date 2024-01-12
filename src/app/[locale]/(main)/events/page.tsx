@@ -101,7 +101,7 @@ const EventsPage = (props: Props) => {
     totalItems: 0,
     paginationModel: {
       page: 0,
-      pageSize: 10,
+      paginate: 10,
     },
     pageSizeOptions: [10, 20, 50, 100],
     sortModel: [],
@@ -194,7 +194,7 @@ const EventsPage = (props: Props) => {
 
       let modalSearch: any = {
         page: dataTable.paginationModel.page + 1,
-        size: dataTable.paginationModel.pageSize,
+        size: dataTable.paginationModel.paginate,
       };
 
       if (dataTable.search) {

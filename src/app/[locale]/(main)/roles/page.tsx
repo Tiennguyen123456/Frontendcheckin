@@ -51,7 +51,7 @@ const RolesPage = (props: Props) => {
     list: [],
     totalItems: 0,
     paginationModel: {
-      limit: 0,
+      page: 0,
       paginate: 10,
     },
     pageSizeOptions: [10, 20, 50, 100],
@@ -119,7 +119,7 @@ const RolesPage = (props: Props) => {
       setLoadingTable(true);
 
       let modalSearch: any = {
-        limit: dataTable.paginationModel.limit + 1,
+        limit: dataTable.paginationModel.page + 1,
         paginate: dataTable.paginationModel.paginate,
       };
 

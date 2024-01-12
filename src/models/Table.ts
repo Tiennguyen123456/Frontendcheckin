@@ -5,7 +5,7 @@ export interface IDataTable<T> {
   list: T[];
   totalItems: number;
   paginationModel: {
-    limit: number;
+    page: number;
     paginate: number;
   };
   pageSizeOptions: number[];
