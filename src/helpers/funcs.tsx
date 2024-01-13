@@ -1,7 +1,9 @@
-import { ROUTERS_BREADCRUMBS, ROUTES } from "../constants/routes";
+import { AppRoutes, ROUTERS_BREADCRUMBS, ROUTES } from "../constants/routes";
+import { SideBarItemType } from "../models/SideBar";
 import { StyledSeePassword } from "../styles/commons";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { checkPermission } from "../utils/common";
 
 export function checkCurrentPath(pathname: string) {
   const matchCurrentPage: string[] = [];
@@ -45,4 +47,135 @@ export function generateBreadcrumbs() {
   }
 
   return [];
+}
+
+export function mergePermissionFromRoles(roles: { [x: string]: string[] }) {
+  let tempPermissionsList: string[] = [];
+
+  for (const [key, value] of Object.entries(roles)) {
+    tempPermissionsList = [...tempPermissionsList, ...value];
+  }
+
+  let permissionsList: string[] = [];
+
+  for (let i = 0; i < tempPermissionsList.length; i++) {
+    const permission = tempPermissionsList[i];
+    if (!permissionsList.includes(permission)) {
+      permissionsList.push(permission);
+    }
+  }
+
+  return permissionsList;
+}
+
+export function getAppRoutesBaseOnPermission(userPermissions: string[]) {
+  let appBarFollowPermission: SideBarItemType[] = [];
+
+  for (const route of AppRoutes) {
+    if (!route?.group) {
+      if (route.permissions.length === 0) {
+        appBarFollowPermission.push(route);
+      } else {
+        const hasPermission = route.permissions.every((permission) => checkPermission(userPermissions, permission));
+        if (hasPermission) {
+          appBarFollowPermission.push(route);
+        }
+      }
+    } else {
+      let tempGroupRoute: SideBarItemType = {
+        key: route.key,
+        permissions: route.permissions,
+        group: {
+          name: route.group.name,
+          child: [],
+        },
+      };
+
+      for (const subRoute of route.group.child) {
+        if (!subRoute.child) {
+          const hasPermission = subRoute.permissions.every((permission) =>
+            checkPermission(userPermissions, permission),
+          );
+
+          if (hasPermission) {
+            if (tempGroupRoute.group?.child) {
+              tempGroupRoute.group.child.push(subRoute);
+            }
+          }
+        } else {
+          let childSubRoutes: SideBarItemType[] = [];
+          for (const childOfSubRoute of subRoute.child) {
+            const hasPermission = childOfSubRoute.permissions.every((permission) =>
+              checkPermission(userPermissions, permission),
+            );
+
+            if (hasPermission) {
+              childSubRoutes.push(childOfSubRoute);
+            }
+          }
+
+          if (childSubRoutes.length > 0) {
+            const tempSubRoute: SideBarItemType = {
+              path: subRoute.path,
+              key: subRoute.key,
+              permissions: subRoute.permissions,
+              sideBarProps: subRoute.sideBarProps,
+              child: childSubRoutes,
+            };
+
+            if (tempGroupRoute.group?.child) {
+              tempGroupRoute.group?.child.push(tempSubRoute);
+            }
+          }
+        }
+      }
+
+      if (tempGroupRoute.group?.child && tempGroupRoute.group.child.length > 0) {
+        appBarFollowPermission.push(tempGroupRoute);
+      }
+    }
+  }
+
+  return appBarFollowPermission;
+}
+
+export function checkPermissionAccessSpecificPage(userPermissions: string[], pathname: string) {
+  for (const route of AppRoutes) {
+    if (!route.group) {
+      if (route.path === pathname) {
+        const hasPermission = route.permissions.every((permission) => checkPermission(userPermissions, permission));
+        if (hasPermission) {
+          return true;
+        }
+        return false;
+      }
+    } else {
+      for (const subRoute of route.group.child) {
+        if (subRoute?.child) {
+          for (const childOfSubRoute of subRoute.child) {
+            if (childOfSubRoute.path === pathname) {
+              const hasPermission = childOfSubRoute.permissions.every((permission) =>
+                checkPermission(userPermissions, permission),
+              );
+              if (hasPermission) {
+                return true;
+              }
+              return false;
+            }
+          }
+        } else {
+          if (subRoute.path === pathname) {
+            const hasPermission = subRoute.permissions.every((permission) =>
+              checkPermission(userPermissions, permission),
+            );
+            if (hasPermission) {
+              return true;
+            }
+            return false;
+          }
+        }
+      }
+    }
+  }
+  return false;
 }

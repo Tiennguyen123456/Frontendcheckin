@@ -103,6 +103,7 @@ export const PRIVATE_ROUTES = [
   ROUTES.PERMISSIONS,
   ROUTES.LANGUAGES,
   ROUTES.CONFIGURATIONS,
+  ROUTES[403],
 ];
 
 export const AppRoutes: SideBarItemType[] = [
@@ -113,9 +114,11 @@ export const AppRoutes: SideBarItemType[] = [
       displayText: "sidebar.items.dashboard",
       icon: <DashboardIcon fontSize="small" />,
     },
+    permissions: [],
   },
   {
     key: "activity",
+    permissions: [],
     group: {
       name: "sidebar.groups.activity",
       child: [
@@ -126,6 +129,7 @@ export const AppRoutes: SideBarItemType[] = [
             displayText: "sidebar.items.events",
             icon: <CelebrationIcon fontSize="small" />,
           },
+          permissions: ["event:view", "event_asset:view"],
         },
         {
           path: ROUTES.CAMPAIGNS,
@@ -134,10 +138,12 @@ export const AppRoutes: SideBarItemType[] = [
             displayText: "sidebar.items.campaigns",
             icon: <CampaignIcon fontSize="small" />,
           },
+          permissions: ["campaign:view"],
         },
         {
           path: ROUTES.DATA,
           key: "activity.data",
+          permissions: [],
           sideBarProps: {
             displayText: "sidebar.items.data",
             icon: <StorageIcon fontSize="small" />,
@@ -149,6 +155,7 @@ export const AppRoutes: SideBarItemType[] = [
               sideBarProps: {
                 displayText: "sidebar.items.tempDataPage1",
               },
+              permissions: [],
             },
             {
               path: ROUTES.TEMP_DATA_PAGE_2,
@@ -156,12 +163,15 @@ export const AppRoutes: SideBarItemType[] = [
               sideBarProps: {
                 displayText: "sidebar.items.tempDataPage2",
               },
+              permissions: [],
             },
           ],
         },
         {
           path: ROUTES.REPORT,
           key: "activity.reports",
+          permissions: [],
+
           sideBarProps: {
             displayText: "sidebar.items.reports",
             icon: <StackedBarChartIcon fontSize="small" />,
@@ -173,6 +183,7 @@ export const AppRoutes: SideBarItemType[] = [
               sideBarProps: {
                 displayText: "sidebar.items.tempReportPage",
               },
+              permissions: [],
             },
           ],
         },
@@ -181,11 +192,13 @@ export const AppRoutes: SideBarItemType[] = [
   },
   {
     key: "administration",
+    permissions: [],
     group: {
       name: "sidebar.groups.administration",
       child: [
         {
           key: "administration.companies",
+          permissions: ["company:view"],
           path: ROUTES.COMPANIES,
           sideBarProps: {
             displayText: "sidebar.items.companies",
@@ -194,6 +207,7 @@ export const AppRoutes: SideBarItemType[] = [
         },
         {
           key: "administration.accounts",
+          permissions: ["user:view"],
           path: ROUTES.ACCOUNTS,
           sideBarProps: {
             displayText: "sidebar.items.accounts",
@@ -202,6 +216,7 @@ export const AppRoutes: SideBarItemType[] = [
         },
         {
           key: "administration.roles",
+          permissions: ["user_role:view"],
           path: ROUTES.ROLES,
           sideBarProps: {
             displayText: "sidebar.items.roles",
@@ -210,6 +225,7 @@ export const AppRoutes: SideBarItemType[] = [
         },
         {
           key: "administration.permissions",
+          permissions: ["user_permission:view"],
           path: ROUTES.PERMISSIONS,
           sideBarProps: {
             displayText: "sidebar.items.permissions",
@@ -221,11 +237,13 @@ export const AppRoutes: SideBarItemType[] = [
   },
   {
     key: "setting",
+    permissions: [],
     group: {
       name: "sidebar.groups.setting",
       child: [
         {
           key: "setting.languages",
+          permissions: ["language:view"],
           path: ROUTES.LANGUAGES,
           sideBarProps: {
             displayText: "sidebar.items.languages",
@@ -234,6 +252,7 @@ export const AppRoutes: SideBarItemType[] = [
         },
         {
           key: "setting.configurations",
+          permissions: ["event:config"],
           path: ROUTES.CONFIGURATIONS,
           sideBarProps: {
             displayText: "sidebar.items.configurations",

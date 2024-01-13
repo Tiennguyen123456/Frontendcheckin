@@ -55,6 +55,10 @@
       "status": "Status"
     }
   },
+  "permissionsPage": {
+    "title": "Permissions",
+    "messageCode": {}
+  },
   "action": {
     "login": "Login",
     "delete": "Delete",
@@ -77,7 +81,7 @@
   "placeholder": {
     "email": "example@example.com",
     "password": "••••••••••••",
-    "role": "Role",
+    "role": "Select role",
     "status": "Status",
     "name": "Name",
     "username": "Username"
@@ -94,12 +98,16 @@
     "GET_USER_PROFILE_FAILED": "Get user profile failed.",
     "CREATE_ACCOUNT_FAILED": "Create account failed.",
     "UPDATE_ACCOUNT_FAILED": "Update account failed.",
-    "DELETE_ACCOUNT_FAILED": "Delete account failed."
+    "DELETE_ACCOUNT_FAILED": "Delete account failed.",
+    "GET_LIST_ROLE_FAILED": "Get list role failed.",
+    "GET_LIST_PERMISSIONS_FAILED": "Get list permissions failed.",
+    "GET_LIST_PERMISSIONS_FROM_ROLE_FAILED": "Get list permissions from role failed."
   },
   "successApi": {
     "CREATE_ACCOUNT_SUCCESS": "Create account success.",
     "UPDATE_ACCOUNT_SUCCESS": "Update account success.",
-    "DELETE_ACCOUNT_SUCCESS": "Delete account success."
+    "DELETE_ACCOUNT_SUCCESS": "Delete account success.",
+    "SAVE_PERMISSIONS_FOR_ROLE_SUCCESS": "Save permissions for the role successfully."
   },
   "localeSwitcher": {
     "en": "English",

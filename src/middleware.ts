@@ -28,6 +28,7 @@ function isMatchPrivateRoute(path: string) {
       }
     }
   }
+  console.log("newPath: ", newPath);
 
   return PRIVATE_ROUTES.some((substr) => newPath.startsWith(substr));
 }
@@ -43,13 +44,14 @@ export default authMiddleware({
       return NextResponse.redirect(new URL(ROUTES.DASHBOARD, req.url));
     }
 
-    const cookie = req.cookies.get("authorization");
+    const token = req.cookies.get("authorization");
 
-    if (!cookie?.value && isMatchPrivateRoute(pathname)) {
+    if (!token?.value && isMatchPrivateRoute(pathname)) {
       return NextResponse.redirect(new URL(ROUTES.LOGIN, req.url));
     }
 
-    if (cookie?.value && !isMatchPrivateRoute(pathname)) {
+    if (token?.value && !isMatchPrivateRoute(pathname)) {
+      console.log("vo this case");
       return NextResponse.redirect(new URL(ROUTES.DASHBOARD, req.url));
     }
 

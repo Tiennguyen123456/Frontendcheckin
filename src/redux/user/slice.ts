@@ -3,13 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IUserProfile } from "../../models/User";
 import { RootState } from "../root/store";
 import { getProfile } from "./actions";
+import { mergePermissionFromRoles } from "../../helpers/funcs";
+import Cookies from "js-cookie";
 
 export interface UserState {
   userProfile: IUserProfile | null;
+  userPermissions: string[];
 }
 
 const initialState: UserState = {
   userProfile: null,
+  userPermissions: [],
 };
 
 export const userSlice = createSlice({
@@ -20,6 +24,10 @@ export const userSlice = createSlice({
     builder
       .addCase(getProfile.fulfilled, (state, action: PayloadAction<IUserProfile>) => {
         state.userProfile = action.payload;
+
+        const userPermissions = mergePermissionFromRoles(action.payload.roles);
+        state.userPermissions = userPermissions;
+        Cookies.set("userPermissions", JSON.stringify(userPermissions));
       })
       .addCase(getProfile.rejected, (state) => {
         state.userProfile = null;
