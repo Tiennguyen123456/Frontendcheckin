@@ -1,16 +1,25 @@
 import { StyledPrimaryButton, StyledSecondaryButton } from "@/styles/commons";
-import theme from "@/theme/theme";
+import theme, { themeColors } from "@/theme/theme";
 import styled from "@emotion/styled";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
+import { ReactNode } from "react";
 
-export default function ModalCustomization({ children, width = 460, title = "Modal Title", open, footer, onClose }) {
+type Props = {
+  children: ReactNode;
+  title?: string;
+  open: boolean;
+  footer?: ReactNode;
+  onClose: () => void;
+};
+
+export default function ModalCustomization({ children, title = "Modal Title", open, footer, onClose }: Props) {
   return (
     <Modal open={open} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-      <StyledModalContent width={width}>
+      <StyledModalContent>
         <StyledModalHead>
-          <StyledModalTitle id="modal-modal-title" variant="h6" component="h2">
+          <StyledModalTitle id="modal-modal-title" variant="h6">
             {title}
           </StyledModalTitle>
         </StyledModalHead>
@@ -20,9 +29,7 @@ export default function ModalCustomization({ children, width = 460, title = "Mod
             footer
           ) : (
             <>
-              <StyledSecondaryButton textColor={theme.colors.blue219} onClick={() => onClose()}>
-                Cancel
-              </StyledSecondaryButton>
+              <StyledSecondaryButton onClick={() => onClose()}>Cancel</StyledSecondaryButton>
               <StyledPrimaryButton>Submit</StyledPrimaryButton>
             </>
           )}
@@ -40,7 +47,7 @@ const StyledModalContent = styled(Box)`
   transform: translate(-50%, -50%);
 
   background-color: white;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1.5px solid gray;
   padding: 16px 24px 32px;
 
@@ -48,30 +55,28 @@ const StyledModalContent = styled(Box)`
   flex-direction: column;
   max-height: calc(100% - 48px);
   height: auto;
+
+  width: calc(100% - 32px);
+
+  ${({ theme }) => `
+    @media only screen and (min-width: 768px) {
+      width: unset;
+      min-width: 460px;
+      max-width: calc(100% - 64px);
+    }
+  `}
 `;
 const StyledModalHead = styled(Box)`
   display: flex;
   flex-direction: column;
-  padding: 16px 0;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 `;
 const StyledModalTitle = styled(Typography)`
   font-size: 24px;
   line-height: 133.4%;
 `;
-const StyledModalDescription = styled(Typography)`
-  color: black;
-  font-size: 14px;
-  line-height: 123.5%;
-  letter-spacing: 0.25px;
-  margin: 8px 0;
-`;
-const StyledModalBody = styled(Box)`
-  / overflow-y: auto; /
-  margin-right: -24px;
-  padding-right: 24px;
-  padding-top: 10px;
-`;
+
+const StyledModalBody = styled(Box)``;
 
 const StyledModalFooter = styled(Box)`
   display: flex;
@@ -79,5 +84,5 @@ const StyledModalFooter = styled(Box)`
   justify-content: flex-end;
   column-gap: 16px;
 
-  padding-top: 40px;
+  padding-top: 12px;
 `;

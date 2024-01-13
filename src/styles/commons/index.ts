@@ -108,7 +108,8 @@ export const StyledChip = styled.div`
 
   &.active,
   &.green,
-  &.event-done {
+  &.event-done,
+  &.account-active {
     background-color: #b7eb8f3d;
     color: #52c41a;
     border-color: #52c41a;

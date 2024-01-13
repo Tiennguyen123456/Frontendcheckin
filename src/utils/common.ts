@@ -1,4 +1,4 @@
-import { EventStatus } from "../constants/enum";
+import { AccountStatus, EventStatus } from "../constants/enum";
 import { locales } from "../i18n-configurations/config";
 
 export function getColorTagEventStatus(eventStatus: string) {
@@ -13,6 +13,45 @@ export function getColorTagEventStatus(eventStatus: string) {
       return "event-inactive";
     case EventStatus.New:
       return "event-new";
+    default:
+      return "";
+  }
+}
+
+export function getTextEventStatus(eventStatus: string) {
+  switch (eventStatus) {
+    case EventStatus.Active:
+      return "Active";
+    case EventStatus.Cancel:
+      return "Cancel";
+    case EventStatus.Done:
+      return "Done";
+    case EventStatus.Inactive:
+      return "Inactive";
+    case EventStatus.New:
+      return "New";
+    default:
+      return "";
+  }
+}
+
+export function getColorTagAccountStatus(accountStatus: string) {
+  switch (accountStatus) {
+    case AccountStatus.Active:
+      return "account-active";
+    case AccountStatus.New:
+      return "account-new";
+    default:
+      return "";
+  }
+}
+
+export function getTextAccountStatus(accountStatus: string) {
+  switch (accountStatus) {
+    case AccountStatus.Active:
+      return "Active";
+    case AccountStatus.New:
+      return "New";
     default:
       return "";
   }

@@ -45,16 +45,16 @@ export default authMiddleware({
       return NextResponse.redirect(new URL(ROUTES.DASHBOARD, req.url));
     }
 
-    if (userPermissions?.value) {
-      const parseUserPermissions = JSON.parse(userPermissions.value) as string[];
-      const urlWithoutLocale = removeLocaleFromPathname(pathname);
+    // if (userPermissions?.value) {
+    //   const parseUserPermissions = JSON.parse(userPermissions.value) as string[];
+    //   const urlWithoutLocale = removeLocaleFromPathname(pathname);
 
-      const hasPermissionAccessCurrPage = checkPermissionForAccessSpecificPage(parseUserPermissions, urlWithoutLocale);
+    //   const hasPermissionAccessCurrPage = checkPermissionForAccessSpecificPage(parseUserPermissions, urlWithoutLocale);
 
-      if (!hasPermissionAccessCurrPage) {
-        return NextResponse.redirect(new URL(ROUTES[403], req.url));
-      }
-    }
+    //   if (!hasPermissionAccessCurrPage) {
+    //     return NextResponse.redirect(new URL(ROUTES[403], req.url));
+    //   }
+    // }
 
     return NextResponse.next();
   },

@@ -23,7 +23,11 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Input from "../../../../components/common/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import Table from "../../../../components/common/Table";
-import { getColorTagEventStatus } from "../../../../utils/common";
+import { getColorTagEventStatus, getTextEventStatus } from "../../../../utils/common";
+import CustomIconBtn from "../../../../components/common/Button/CustomIconBtn";
+import { EventStatusOptions } from "../../../../constants/variables";
+import SettingsIcon from "@mui/icons-material/Settings";
+import GroupsIcon from "@mui/icons-material/Groups";
 
 type Props = {};
 
@@ -101,7 +105,7 @@ const EventsPage = (props: Props) => {
     totalItems: 0,
     paginationModel: {
       page: 0,
-      paginate: 10,
+      pageSize: 10,
     },
     pageSizeOptions: [10, 20, 50, 100],
     sortModel: [],
@@ -153,23 +157,27 @@ const EventsPage = (props: Props) => {
       sortable: false,
       renderCell: (params) => {
         return (
-          <StyledChip className={getColorTagEventStatus(params.value)}>
-            {params.value ? "Active" : "Inactive"}
-          </StyledChip>
+          <StyledChip className={getColorTagEventStatus(params.value)}>{getTextEventStatus(params.value)}</StyledChip>
         );
       },
     },
     {
       field: "",
       headerName: "",
-      minWidth: 100,
+      minWidth: 200,
       headerAlign: "right",
       align: "right",
       sortable: false,
       renderCell: ({ row }) => (
         <StyledActionGroup>
+          <IconButton>
+            <SettingsIcon />
+          </IconButton>
           <IconButton aria-label="edit">
             <EditIcon sx={{ color: themeColors.colors.blue219 }} />
+          </IconButton>
+          <IconButton>
+            <GroupsIcon />
           </IconButton>
           <ConfirmPopover
             id={row?.name}
@@ -194,7 +202,7 @@ const EventsPage = (props: Props) => {
 
       let modalSearch: any = {
         page: dataTable.paginationModel.page + 1,
-        size: dataTable.paginationModel.paginate,
+        size: dataTable.paginationModel.pageSize,
       };
 
       if (dataTable.search) {
@@ -234,7 +242,7 @@ const EventsPage = (props: Props) => {
   return (
     <div className="p-3">
       <HeadContent title={translation("eventsPage.title")}>
-        <div className="flex gap-x-3">
+        <div className="hidden md:flex gap-x-3">
           <StyledPrimaryButton size="small" startIcon={<AddIcon />}>
             {translation("action.create")}
           </StyledPrimaryButton>
@@ -246,41 +254,43 @@ const EventsPage = (props: Props) => {
             {translation("action.delete")}
           </StyledSecondaryButton>
         </div>
+
+        <div className="flex gap-x-3 md:hidden">
+          <CustomIconBtn>
+            <AddIcon />
+          </CustomIconBtn>
+          <CustomIconBtn type="secondary" className="text-red-600 border-red-600">
+            <DeleteIcon />
+          </CustomIconBtn>
+        </div>
       </HeadContent>
 
       <StyledContentWrapper>
-        <Grid container justifyContent="space-between" alignItems="center">
-          <Grid item container xs={8}>
-            <Grid container gap={2} alignItems="end">
-              <Grid item xs={4}>
-                <Input
-                  label="Search"
-                  placeholder={"Name, Code"}
-                  value={dataTable.search}
-                  onChange={(search) => handleTableChange("search", search)}
-                />
-              </Grid>
-              <Grid item xs={2.5}>
-                <AutoComplete
-                  label={translation("label.active")}
-                  value={dataTable.enabled}
-                  options={[
-                    { label: "Active", value: true },
-                    { label: "Inactive", value: false },
-                  ]}
-                  onChange={(data) => handleTableChange("enabled", data)}
-                />
-              </Grid>
-              <Grid item xs={1}>
-                <StyledIconBtn
-                  variant="outlined"
-                  startIcon={<SearchIcon sx={{ height: "24px", width: "24px" }} />}
-                  onClick={handleFetchData}
-                ></StyledIconBtn>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+        <div className="flex flex-wrap gap-x-3 gap-y-4 mb-5">
+          <div className="w-full md:w-52">
+            <Input
+              label="Search"
+              placeholder={"Name, Code"}
+              value={dataTable.search}
+              onChange={(search) => handleTableChange("search", search)}
+            />
+          </div>
+          <div className="w-1/2 md:w-32">
+            <AutoComplete
+              label={translation("label.active")}
+              value={dataTable.enabled}
+              options={EventStatusOptions}
+              onChange={(data) => handleTableChange("enabled", data)}
+            />
+          </div>
+          <div className="self-end">
+            <StyledIconBtn
+              variant="outlined"
+              startIcon={<SearchIcon sx={{ height: "24px", width: "24px" }} />}
+              onClick={handleFetchData}
+            />
+          </div>
+        </div>
 
         <Table
           dataTable={dataTable}

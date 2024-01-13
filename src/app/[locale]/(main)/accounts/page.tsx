@@ -1,14 +1,18 @@
 "use client";
 import AutoComplete from "@/components/common/AutoComplete";
 import HeadContent from "@/components/common/HeadContent";
+import ConfirmPopover from "@/components/common/Popover";
 import Table from "@/components/common/Table";
 import Input from "@/components/common/TextField";
-import { DateTimeFormat } from "@/constants/variables";
+import UserModal from "@/components/modal/UserModal";
+import { DateTimeFormat, UserStatus } from "@/constants/variables";
+import { IDataTable } from "@/models/Table";
 import { IAccountRes } from "@/models/api/account-api";
-import { IDataTable, IListRes } from "@/models/Table";
+import { IRoleRes } from "@/models/api/authority-api";
+import { useAppSelector } from "@/redux/root/hooks";
+import { selectUser } from "@/redux/user/slice";
 import accountApi from "@/services/account-api";
-// import { getListRoles } from "@/redux/accounts/actions";
-// import { deleteUserService, getAdminMemberListService } from "@/services/account";
+import authorityApi from "@/services/authority-api";
 import {
   StyledActionGroup,
   StyledChip,
@@ -16,10 +20,12 @@ import {
   StyledContentWrapper,
   StyledIconBtn,
   StyledLink,
-  StyledPageContent,
   StyledPrimaryButton,
 } from "@/styles/commons";
-import { toastError, toastSuccess } from "@/utils/toast";
+import { themeColors } from "@/theme/theme";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Grid, IconButton } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
@@ -28,17 +34,8 @@ import dayjs from "dayjs";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import AddIcon from "@mui/icons-material/Add";
-import { useAppSelector } from "@/redux/root/hooks";
-import { selectUser } from "@/redux/user/slice";
-import authorityApi from "@/services/authority-api";
-import { IRoleRes } from "@/models/api/authority-api";
-import ConfirmPopover from "@/components/common/Popover";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { themeColors } from "@/theme/theme";
-import UserModal from "@/components/modal/UserModal";
+import CustomIconBtn from "../../../../components/common/Button/CustomIconBtn";
+import { getColorTagAccountStatus, getTextAccountStatus } from "../../../../utils/common";
 
 const [ADMIN, SYSTEM_ADMIN] = ["admin", "system-admin"];
 
@@ -70,7 +67,7 @@ const AccountsPage = () => {
     totalItems: 0,
     paginationModel: {
       page: 0,
-      paginate: 20,
+      pageSize: 20,
     },
     pageSizeOptions: [10, 20, 50, 100],
     sortModel: [],
@@ -144,8 +141,11 @@ const AccountsPage = () => {
       sortable: false,
       renderCell: ({ row }) => {
         return (
-          <StyledChip style={{ width: "70px", textAlign: "center" }} className={row.status ? "active" : ""}>
-            {row.status === "ACTIVE" ? "Active" : "New"}
+          <StyledChip
+            style={{ width: "70px", textAlign: "center", textTransform: "capitalize" }}
+            className={getColorTagAccountStatus(row?.status)}
+          >
+            {getTextAccountStatus(row.status)}
           </StyledChip>
         );
       },
@@ -225,14 +225,14 @@ const AccountsPage = () => {
     try {
       setLoadingTable(true);
       // const model = generateTableFilters(dataTable);
-      const modalSearch = {
+      let modalSearch: any = {
         page: dataTable.paginationModel.page + 1,
-        pageSize: dataTable.paginationModel.paginate,
+        pageSize: dataTable.paginationModel.pageSize,
       };
 
-      // if (dataTable.search) {
-      //   modalSearch["search"] = dataTable.search;
-      // }
+      if (dataTable.search) {
+        modalSearch["search[]"] = dataTable.search;
+      }
 
       // if (dataTable.enabled?.value !== null && dataTable.enabled?.value !== undefined) {
       //   modalSearch["enabled"] = dataTable.enabled.value;
@@ -270,59 +270,63 @@ const AccountsPage = () => {
 
   useEffect(() => {
     if (roles?.length === 0) handleGetRoles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     handleFetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataTable.paginationModel, dataTable.sortModel]);
 
   return (
-    <StyledPageContent>
-      <HeadContent hasBackBtn title={translation("accountPage.title")}>
-        <StyledPrimaryButton startIcon={<AddIcon />} onClick={() => setOpenModal(!isOpenModal)}>
-          {translation("action.create")}
-        </StyledPrimaryButton>
+    <div className="p-3">
+      <HeadContent title={translation("accountPage.title")}>
+        <div className="hidden md:block">
+          <StyledPrimaryButton startIcon={<AddIcon />} onClick={() => setOpenModal(!isOpenModal)}>
+            {translation("action.create")}
+          </StyledPrimaryButton>
+        </div>
+
+        <CustomIconBtn className="md:hidden" onClick={() => setOpenModal(!isOpenModal)}>
+          <AddIcon />
+        </CustomIconBtn>
       </HeadContent>
+
       <StyledContentWrapper>
-        <Grid2 container justifyContent="space-between" alignItems="center">
-          <Grid item container xs={8} gap={2} alignItems="center">
-            <Grid item xs={4}>
-              <Input
-                value={dataTable.search}
-                fullWidth
-                label={translation("label.search")}
-                placeholder="Name, Email"
-                onChange={(value) => handleTableChange("search", value)}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <AutoComplete
-                label={translation("label.role")}
-                value={dataTable.role || null}
-                options={[...roles.map((role) => ({ label: role.name, value: role.name }))]}
-                onChange={(data) => handleTableChange("role", data)}
-              />
-            </Grid>
-            <Grid item xs={2.5}>
-              <AutoComplete
-                label={translation("label.status")}
-                value={dataTable.status || null}
-                options={[
-                  { label: "ACTIVE", value: "ACTIVE" },
-                  { label: "NEW", value: "NEW" },
-                ]}
-                onChange={(data) => handleTableChange("status", data)}
-              />
-            </Grid>
-            <Grid item xs={1}>
-              <StyledIconBtn
-                variant="outlined"
-                startIcon={<SearchIcon sx={{ height: "24px", width: "24px" }} />}
-                onClick={handleFetchData}
-              />
-            </Grid>
-          </Grid>
-        </Grid2>
+        <div className="flex flex-wrap gap-x-3 gap-y-4 mb-5">
+          <div className="w-full md:w-52">
+            <Input
+              value={dataTable.search}
+              fullWidth
+              label={translation("label.search")}
+              placeholder="Name, Email"
+              onChange={(value) => handleTableChange("search", value)}
+            />
+          </div>
+          <div className="w-[calc(50%-6px)] md:w-32">
+            <AutoComplete
+              label={translation("label.role")}
+              value={dataTable.role || null}
+              options={[...roles.map((role) => ({ label: role.name, value: role.name }))]}
+              onChange={(data) => handleTableChange("role", data)}
+            />
+          </div>
+          <div className="w-[calc(50%-6px)] md:w-32">
+            <AutoComplete
+              label={translation("label.status")}
+              value={dataTable.status || null}
+              options={UserStatus}
+              onChange={(data) => handleTableChange("status", data)}
+            />
+          </div>
+          <div className="self-end">
+            <StyledIconBtn
+              variant="outlined"
+              startIcon={<SearchIcon sx={{ height: "24px", width: "24px" }} />}
+              onClick={handleFetchData}
+            />
+          </div>
+        </div>
 
         <Table
           dataTable={dataTable}
@@ -344,7 +348,7 @@ const AccountsPage = () => {
           onRefresh={handleFetchData}
         />
       )}
-    </StyledPageContent>
+    </div>
   );
 };
 

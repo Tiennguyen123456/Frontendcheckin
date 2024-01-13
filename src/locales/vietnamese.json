@@ -15,9 +15,6 @@
       "guardName": "Thiết bị"
     },
     "action": {
-      "CREATE_ROLE_SUCCESS": "Tạo mới vai trò thành công.",
-      "UPDATE_ROLE_SUCCESS": "Chỉnh sửa vai trò thành công.",
-      "DELETE_ROLE_SUCCESS": "Xoá vai trò thành công.",
       "CREATE_ROLE_FAILED": "Tạo mới vai trò thất bại.",
       "UPDATE_ROLE_FAILED": "Chỉnh sửa vai trò thất bại.",
       "DELETE_ROLE_FAILED": "Xoá thất vai trò bại."
@@ -89,7 +86,9 @@
     "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
     "invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ.",
     "requiredPassword": "Vui lòng nhập mật khẩu của bạn.",
-    "invalidPassword": "Mật khẩu phải có ít nhất 8 ký tự và bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt."
+    "invalidPassword": "Mật khẩu phải có ít nhất 8 ký tự và bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.",
+    "requiredRoleName": "Vui lòng nhập tên vai trò.",
+    "requiredGuardName": "Vui lòng nhập tên thiết bị."
   },
   "errorApi": {
     "LOGIN_FAILED": "Đăng nhập thất bại.",
@@ -106,7 +105,10 @@
     "CREATE_ACCOUNT_SUCCESS": "Tạo mới tài khoản thành công.",
     "UPDATE_ACCOUNT_SUCCESS": "Chỉnh sửa tài khoản thành công.",
     "DELETE_ACCOUNT_SUCCESS": "Xoá tài khoản thành công.",
-    "SAVE_PERMISSIONS_FOR_ROLE_SUCCESS": "Lưu quyền cho vai trò thành công."
+    "SAVE_PERMISSIONS_FOR_ROLE_SUCCESS": "Lưu quyền cho vai trò thành công.",
+    "CREATE_ROLE_SUCCESS": "Tạo mới vai trò thành công.",
+    "UPDATE_ROLE_SUCCESS": "Chỉnh sửa vai trò thành công.",
+    "DELETE_ROLE_SUCCESS": "Xoá vai trò thành công."
   },
   "localeSwitcher": {
     "en": "Tiếng Anh",
