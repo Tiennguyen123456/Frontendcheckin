@@ -263,3 +263,23 @@ export const AppRoutes: SideBarItemType[] = [
     },
   },
 ];
+
+export const AppRoutesPermissions = [
+  { path: ROUTES.LOGIN, permissions: [] },
+  { path: ROUTES.DASHBOARD, permissions: [] },
+  { path: ROUTES.EVENTS, permissions: ["event:view", "event_asset:view"] },
+  { path: ROUTES.CAMPAIGNS, permissions: ["campaign:view"] },
+  { path: ROUTES.CAMPAIGNS_DETAILS, permissions: ["campaign:view"] },
+  { path: ROUTES.DATA, permissions: [] },
+  { path: ROUTES.TEMP_DATA_PAGE_1, permissions: [] },
+  { path: ROUTES.TEMP_DATA_PAGE_2, permissions: [] },
+  { path: ROUTES.REPORT, permissions: [] },
+  { path: ROUTES.TEMP_REPORT_PAGE, permissions: [] },
+  { path: ROUTES.COMPANIES, permissions: ["company:view"] },
+  { path: ROUTES.ACCOUNTS, permissions: ["user:view"] },
+  { path: ROUTES.ROLES, permissions: ["user_role:view"] },
+  { path: ROUTES.PERMISSIONS, permissions: ["user_permission:view"] },
+  { path: ROUTES.LANGUAGES, permissions: ["language:view"] },
+  { path: ROUTES.CONFIGURATIONS, permissions: ["event:config"] },
+  { path: ROUTES[403], permissions: [] },
+];

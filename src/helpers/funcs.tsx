@@ -1,4 +1,4 @@
-import { AppRoutes, ROUTERS_BREADCRUMBS, ROUTES } from "../constants/routes";
+import { AppRoutes, AppRoutesPermissions, ROUTERS_BREADCRUMBS, ROUTES } from "../constants/routes";
 import { SideBarItemType } from "../models/SideBar";
 import { StyledSeePassword } from "../styles/commons";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -139,43 +139,15 @@ export function getAppRoutesBaseOnPermission(userPermissions: string[]) {
   return appBarFollowPermission;
 }
 
-export function checkPermissionAccessSpecificPage(userPermissions: string[], pathname: string) {
-  for (const route of AppRoutes) {
-    if (!route.group) {
-      if (route.path === pathname) {
-        const hasPermission = route.permissions.every((permission) => checkPermission(userPermissions, permission));
-        if (hasPermission) {
-          return true;
-        }
-        return false;
+export function checkPermissionForAccessSpecificPage(userPermissions: string[], pathname: string) {
+  for (const route of AppRoutesPermissions) {
+    if (route.path === pathname) {
+      const hasPermission = route.permissions.every((permission) => checkPermission(userPermissions, permission));
+      if (hasPermission) {
+        return true;
       }
-    } else {
-      for (const subRoute of route.group.child) {
-        if (subRoute?.child) {
-          for (const childOfSubRoute of subRoute.child) {
-            if (childOfSubRoute.path === pathname) {
-              const hasPermission = childOfSubRoute.permissions.every((permission) =>
-                checkPermission(userPermissions, permission),
-              );
-              if (hasPermission) {
-                return true;
-              }
-              return false;
-            }
-          }
-        } else {
-          if (subRoute.path === pathname) {
-            const hasPermission = subRoute.permissions.every((permission) =>
-              checkPermission(userPermissions, permission),
-            );
-            if (hasPermission) {
-              return true;
-            }
-            return false;
-          }
-        }
-      }
+      return false;
     }
   }
-  return false;
+  return true;
 }
