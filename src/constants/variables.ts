@@ -12,3 +12,21 @@ export const passwordRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$
 export const DateTimeFormat = "DD/MM/YYYY hh:mm A";
 
 export const DateFormat = "DD/MM/YYYY";
+
+export const RoleStatus = [
+  { label: "Active", value: true },
+  { label: "Inactive", value: false },
+];
+
+export const UserStatus = [
+  { label: "Active", value: "ACTIVE" },
+  { label: "New", value: "NEW" },
+];
+
+export const EventStatusOptions = [
+  { label: "New", value: "NEW" },
+  { label: "Active", value: "ACTIVE" },
+  { label: "Inactive", value: "INACTIVE" },
+  { label: "Done", value: "DONE" },
+  { label: "Cancel", value: "CANCEL" },
+];

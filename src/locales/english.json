@@ -15,9 +15,6 @@
       "guardName": "Guard name"
     },
     "action": {
-      "CREATE_ROLE_SUCCESS": "Create role success.",
-      "UPDATE_ROLE_SUCCESS": "Update role success.",
-      "DELETE_ROLE_SUCCESS": "Delete role success.",
       "CREATE_ROLE_FAILED": "Create role failed.",
       "UPDATE_ROLE_FAILED": "Update role failed.",
       "DELETE_ROLE_FAILED": "Delete role failed."
@@ -90,7 +87,9 @@
     "requiredEmail": "Please enter your email address.",
     "invalidEmail": "Please enter valid email address.",
     "requiredPassword": "Please enter your password.",
-    "invalidPassword": "Password must be at least 8 characters and include uppercase, lowercase, number, and special character."
+    "invalidPassword": "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.",
+    "requiredRoleName": "Please enter role name.",
+    "requiredGuardName": "Please enter guard name."
   },
   "errorApi": {
     "LOGIN_FAILED": "Login failed.",
@@ -107,7 +106,10 @@
     "CREATE_ACCOUNT_SUCCESS": "Create account success.",
     "UPDATE_ACCOUNT_SUCCESS": "Update account success.",
     "DELETE_ACCOUNT_SUCCESS": "Delete account success.",
-    "SAVE_PERMISSIONS_FOR_ROLE_SUCCESS": "Save permissions for the role successfully."
+    "SAVE_PERMISSIONS_FOR_ROLE_SUCCESS": "Save permissions for the role successfully.",
+    "CREATE_ROLE_SUCCESS": "Create role success.",
+    "UPDATE_ROLE_SUCCESS": "Update role success.",
+    "DELETE_ROLE_SUCCESS": "Delete role success."
   },
   "localeSwitcher": {
     "en": "English",

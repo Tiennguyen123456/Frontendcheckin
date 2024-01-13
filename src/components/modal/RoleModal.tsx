@@ -3,20 +3,13 @@ import Input from "@/components/common/TextField";
 import BasicModal from "@/components/modal";
 import { IRoleRes } from "@/models/api/authority-api";
 import authorityApi from "@/services/authority-api";
-// import { roleRegex } from "@/constants/variables";
-// import { getListRoles } from "@/redux/accounts/actions";
-// import { createAuthorityService, editAuthorityService } from "@/services/authority";
 import { StyledPrimaryButton, StyledSecondaryButton } from "@/styles/commons";
-import { themeColors } from "@/theme/theme";
 import { toastError, toastSuccess } from "@/utils/toast";
 import styled from "@emotion/styled";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
-
-// const { hasPrefixRole, onlyUppercaseAnd, twoUnderscoreNotNextToEachOther } = roleRegex;
 
 const { yupResolver } = require("@hookform/resolvers/yup");
 
@@ -26,23 +19,31 @@ const StyledFormSection = styled.form`
   row-gap: 20px;
 `;
 
-export default function RoleModal({ show, onClose, onRefetch, role }: any) {
-  // const { messages } = useIntl();
+type Props = {
+  show: boolean;
+  onClose: () => void;
+  onRefetch: () => void;
+  defaultRole: IRoleRes | undefined;
+};
+
+type FormRoleValue = {
+  name: string;
+  guardName: string;
+  enabled: boolean;
+};
+
+export default function RoleModal({ show, onClose, onRefetch, defaultRole }: Props) {
   // ** I18n
   const translation = useTranslations();
-  const [roles, setRoles] = useState<IRoleRes[]>([]);
+
+  // ** State
   const [loading, setLoading] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
   const RoleSchema = yup.object().shape({
-    title: yup.string(),
-    // .required(messages["ROLE_TITLE_IS_EMPTY"])
-    name: yup.string(),
-    // .required(messages["ROLE_NAME_IS_EMPTY"])
-    // .matches(hasPrefixRole, messages["ROLE_NAME_IS_INVALID"])
-    // .matches(onlyUppercaseAnd, messages["ROLE_NAME_ONLY_ACCEPT_UPPERCASE_AND_UNDERSCORE"])
-    // .matches(twoUnderscoreNotNextToEachOther, messages["ROLE_NAME_NOT_ACCEPT_2_UNDERSCORE_NEXT_TO_EACH_OTHER"]),
-    enable: yup.string(),
+    name: yup.string().required(translation("error.requiredRoleName")),
+    guardName: yup.string().required(translation("error.requiredGuardName")),
+    enable: yup.boolean().notRequired(),
   });
 
   const {
@@ -50,30 +51,24 @@ export default function RoleModal({ show, onClose, onRefetch, role }: any) {
     control,
     handleSubmit,
     reset,
-  } = useForm({
+  } = useForm<FormRoleValue>({
     mode: "onChange",
-    // resolver: yupResolver(RoleSchema),
+    resolver: yupResolver(RoleSchema),
     defaultValues: {
-      id: null,
       name: "",
-      guard_name: "",
-      enable: false,
+      guardName: "",
+      enabled: false,
     },
   });
 
-  const handleGetListRoles = async () => {
-    const response = await authorityApi.getRoles();
-    setRoles(response.collection);
-  };
-
   const handleCloseModal = () => {
     // reset form
-    reset({ id: null, name: "", guard_name: "", enable: false });
+    reset();
     setIsEdit(false);
     onClose();
   };
 
-  const handleSubmitRole = async (values: any) => {
+  const handleSubmitRole = async (values: FormRoleValue) => {
     try {
       setLoading(true);
 
@@ -81,17 +76,17 @@ export default function RoleModal({ show, onClose, onRefetch, role }: any) {
 
       if (isEdit) {
         const body = {
-          id: values.id,
+          id: defaultRole?.id,
           name: values.name,
-          guard_name: values.guard_name,
-          enable: values.enable,
+          guard_name: values.guardName,
+          enable: values.enabled,
         };
         response = await authorityApi.storeRole(body);
       } else {
         const body = {
           name: values.name,
-          guard_name: values.guard_name,
-          enable: values.enable,
+          guard_name: values.guardName,
+          enable: values.enabled,
         };
 
         response = await authorityApi.storeRole(body);
@@ -99,44 +94,40 @@ export default function RoleModal({ show, onClose, onRefetch, role }: any) {
       if (response.status === "success") {
         onRefetch();
         toastSuccess(
-          isEdit
-            ? translation("rolesPage.roleModal.action.UPDATE_ROLE_SUCCESS")
-            : translation("rolesPage.roleModal.action.CREATE_ROLE_SUCCESS"),
+          isEdit ? translation("successApi.UPDATE_ROLE_SUCCESS") : translation("successApi.CREATE_ROLE_SUCCESS"),
         );
         handleCloseModal();
-        handleGetListRoles();
         setLoading(false);
       }
     } catch (error: any) {
       setLoading(false);
-      // const { result_info } = error.response.data;
-      // if (result_info.results?.[0]?.error_msg) {
-      //   toastError(result_info.results?.[0]?.error_msg);
-      // } else {
-      isEdit
-        ? translation("rolesPage.roleModal.action.UPDATE_ROLE_FAILED")
-        : translation("rolesPage.roleModal.action.CREATE_ROLE_FAILED");
-      // }
       console.log("error: ", error);
+
+      const data = error?.response?.data;
+      if (data?.message_code) {
+        toastError(translation(`errorApi.${data?.message_code}`));
+      } else {
+        isEdit
+          ? toastError(translation("errorApi.UPDATE_ROLE_FAILED"))
+          : toastError(translation("errorApi.CREATE_ROLE_FAILED"));
+      }
     }
   };
 
   useEffect(() => {
-    if (role) {
-      console.log("role: ", role);
-
+    if (defaultRole) {
       setIsEdit(true);
       reset({
-        id: role.id,
-        enable: role.enable,
-        name: role.name,
-        guard_name: role.guard_name,
+        enabled: defaultRole.enable ? true : false,
+        name: defaultRole.name,
+        guardName: defaultRole.guard_name,
       });
     } else {
       setIsEdit(false);
       reset();
     }
-  }, [role]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultRole]);
 
   return (
     <BasicModal
@@ -145,12 +136,7 @@ export default function RoleModal({ show, onClose, onRefetch, role }: any) {
       onClose={handleCloseModal}
       footer={
         <>
-          <StyledSecondaryButton
-            size="medium"
-            startIcon={<HighlightOffIcon />}
-            sx={{ color: themeColors.colors.redD32 }}
-            onClick={handleCloseModal}
-          >
+          <StyledSecondaryButton size="medium" onClick={handleCloseModal}>
             {translation("action.cancel")}
           </StyledSecondaryButton>
           <StyledPrimaryButton loading={loading} loadingPosition="start" form="RoleForm" type="submit">
@@ -180,7 +166,7 @@ export default function RoleModal({ show, onClose, onRefetch, role }: any) {
 
         <Controller
           control={control}
-          name="guard_name"
+          name="guardName"
           render={({ field }) => (
             <Input
               isRequired
@@ -189,8 +175,8 @@ export default function RoleModal({ show, onClose, onRefetch, role }: any) {
               fullWidth
               label={translation("rolesPage.roleModal.label.guardName")}
               placeholder={translation("rolesPage.roleModal.placeholder.guardName")}
-              error={Boolean(errors?.guard_name?.message)}
-              helperText={errors?.guard_name?.message}
+              error={Boolean(errors?.guardName?.message)}
+              helperText={errors?.guardName?.message}
               onChange={(value) => field.onChange(value)}
               onBlur={(value) => field.onChange(value)}
             />
@@ -199,7 +185,7 @@ export default function RoleModal({ show, onClose, onRefetch, role }: any) {
 
         <Controller
           control={control}
-          name="enable"
+          name="enabled"
           render={({ field }) => (
             <CustomCheckbox
               label={translation("rolesPage.roleModal.active")}

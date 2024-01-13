@@ -16,3 +16,8 @@ export enum EventStatus {
   Done = "DONE",
   Cancel = "CANCEL",
 }
+
+export enum AccountStatus {
+  New = "NEW",
+  Active = "ACTIVE",
+}
