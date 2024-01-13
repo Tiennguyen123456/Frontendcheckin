@@ -55,6 +55,9 @@
       "status": "Trạng thái"
     }
   },
+  "permissionsPage": {
+    "title": "Phân quyền"
+  },
   "action": {
     "login": "Đăng nhập",
     "delete": "Xóa",
@@ -77,7 +80,7 @@
   "placeholder": {
     "email": "example@example.com",
     "password": "••••••••••••",
-    "role": "Vai trò",
+    "role": "Chọn vai trò",
     "status": "Trạng thái",
     "name": "Tên",
     "username": "Tên đăng nhập"
@@ -94,12 +97,16 @@
     "GET_USER_PROFILE_FAILED": "Lấy thông tin người dùng thất bại.",
     "CREATE_ACCOUNT_FAILED": "Tạo mới tài khoản thất bại.",
     "UPDATE_ACCOUNT_FAILED": "Chỉnh sửa tài khoản thất bại.",
-    "DELETE_ACCOUNT_FAILED": "Xoá tài khoản thất bại."
+    "DELETE_ACCOUNT_FAILED": "Xoá tài khoản thất bại.",
+    "GET_LIST_ROLE_FAILED": "Lấy danh sách vai trò thất bại.",
+    "GET_LIST_PERMISSIONS_FAILED": "Lấy danh sách phân quyền thất bại.",
+    "GET_LIST_PERMISSIONS_FROM_ROLE_FAILED": "Lấy danh sách phân quyền thất bại."
   },
   "successApi": {
     "CREATE_ACCOUNT_SUCCESS": "Tạo mới tài khoản thành công.",
     "UPDATE_ACCOUNT_SUCCESS": "Chỉnh sửa tài khoản thành công.",
-    "DELETE_ACCOUNT_SUCCESS": "Xoá tài khoản thành công."
+    "DELETE_ACCOUNT_SUCCESS": "Xoá tài khoản thành công.",
+    "SAVE_PERMISSIONS_FOR_ROLE_SUCCESS": "Lưu quyền cho vai trò thành công."
   },
   "localeSwitcher": {
     "en": "Tiếng Anh",

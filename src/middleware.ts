@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 import { Languages } from "./constants/enum";
 import { PRIVATE_ROUTES, ROUTES } from "./constants/routes";
 import { locales } from "./i18n-configurations/config";
+import { checkPermissionForAccessSpecificPage } from "./helpers/funcs";
+import { removeLocaleFromPathname } from "./utils/common";
 
 const intlMiddleware = createMiddleware({
   // A list of all locales that are supported
@@ -16,18 +18,7 @@ const intlMiddleware = createMiddleware({
 });
 
 function isMatchPrivateRoute(path: string) {
-  let newPath = path;
-
-  for (let i = 0; i < locales.length; i++) {
-    const locale = locales[i];
-    if (path.startsWith(`/${locale}`)) {
-      const splitPath = path.split(`/${locale}`);
-      if (splitPath.length > 1) {
-        newPath = splitPath[1];
-        break;
-      }
-    }
-  }
+  let newPath = removeLocaleFromPathname(path);
 
   return PRIVATE_ROUTES.some((substr) => newPath.startsWith(substr));
 }
@@ -43,14 +34,26 @@ export default authMiddleware({
       return NextResponse.redirect(new URL(ROUTES.DASHBOARD, req.url));
     }
 
-    const cookie = req.cookies.get("authorization");
+    const token = req.cookies.get("authorization");
+    const userPermissions = req.cookies.get("userPermissions");
 
-    if (!cookie?.value && isMatchPrivateRoute(pathname)) {
+    if (!token?.value && isMatchPrivateRoute(pathname)) {
       return NextResponse.redirect(new URL(ROUTES.LOGIN, req.url));
     }
 
-    if (cookie?.value && !isMatchPrivateRoute(pathname)) {
+    if (token?.value && !isMatchPrivateRoute(pathname)) {
       return NextResponse.redirect(new URL(ROUTES.DASHBOARD, req.url));
+    }
+
+    if (userPermissions?.value) {
+      const parseUserPermissions = JSON.parse(userPermissions.value) as string[];
+      const urlWithoutLocale = removeLocaleFromPathname(pathname);
+
+      const hasPermissionAccessCurrPage = checkPermissionForAccessSpecificPage(parseUserPermissions, urlWithoutLocale);
+
+      if (!hasPermissionAccessCurrPage) {
+        return NextResponse.redirect(new URL(ROUTES[403], req.url));
+      }
     }
 
     return NextResponse.next();

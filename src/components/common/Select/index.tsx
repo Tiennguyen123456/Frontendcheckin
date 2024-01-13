@@ -2,9 +2,9 @@
 import { StyledLabel, StyledMenuItem } from "@/styles/commons";
 import { themeColors } from "@/theme/theme";
 import styled from "@emotion/styled";
-import { FormControl, FormHelperText, InputLabel, Select, ThemeProvider, createTheme } from "@mui/material";
-import { IOption } from "../../../models/Select";
+import { FormControl, FormHelperText, Select, ThemeProvider, createTheme } from "@mui/material";
 import clsx from "clsx";
+import { IOption } from "../../../models/Select";
 
 const selectTheme = createTheme({
   palette: {
@@ -17,12 +17,6 @@ const selectTheme = createTheme({
       defaultProps: {
         displayEmpty: true,
       },
-      // styleOverrides: {
-      //   selectMenu: {
-      //     height: "auto",
-      //     minHeight: "32px",
-      //   },
-      // },
     },
   },
 });
@@ -30,6 +24,7 @@ const selectTheme = createTheme({
 type Props = {
   [x: string]: any;
   label?: string;
+  placeholder?: string;
   value: string;
   disabled?: boolean;
   readOnly?: boolean;
@@ -43,6 +38,7 @@ type Props = {
 
 function SelectField({
   label,
+  placeholder,
   value,
   disabled,
   readOnly = false,
