@@ -28,6 +28,9 @@ import CustomIconBtn from "../../../../components/common/Button/CustomIconBtn";
 import { EventStatusOptions } from "../../../../constants/variables";
 import SettingsIcon from "@mui/icons-material/Settings";
 import GroupsIcon from "@mui/icons-material/Groups";
+import { useRouter } from "next/router";
+import useCustomRouter from "../../../../hooks/useCustomRouter";
+import { ROUTES } from "../../../../constants/routes";
 
 type Props = {};
 
@@ -96,6 +99,9 @@ const rows: EventRowType[] = [
 const EventsPage = (props: Props) => {
   // ** I18n
   const translation = useTranslations();
+
+  // ** Custom Hook
+  const routerPushWithLocale = useCustomRouter();
 
   // ** State
   const [loadingTable, setLoadingTable] = useState(false);
@@ -234,6 +240,10 @@ const EventsPage = (props: Props) => {
     }
   };
 
+  const handleClickAddEvent = () => {
+    routerPushWithLocale(ROUTES.EVENT_CREATE);
+  };
+
   useEffect(() => {
     // handleFetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -243,7 +253,7 @@ const EventsPage = (props: Props) => {
     <div className="p-3">
       <HeadContent title={translation("eventsPage.title")}>
         <div className="hidden md:flex gap-x-3">
-          <StyledPrimaryButton size="small" startIcon={<AddIcon />}>
+          <StyledPrimaryButton size="small" startIcon={<AddIcon />} onClick={handleClickAddEvent}>
             {translation("action.create")}
           </StyledPrimaryButton>
           <StyledSecondaryButton
@@ -256,7 +266,7 @@ const EventsPage = (props: Props) => {
         </div>
 
         <div className="flex gap-x-3 md:hidden">
-          <CustomIconBtn>
+          <CustomIconBtn onClick={handleClickAddEvent}>
             <AddIcon />
           </CustomIconBtn>
           <CustomIconBtn type="secondary" className="text-red-600 border-red-600">

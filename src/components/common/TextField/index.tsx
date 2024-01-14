@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import { error } from "console";
 import { ReactNode, useState } from "react";
+import { StyledLabel } from "../../../styles/commons";
+import clsx from "clsx";
 
 interface IInput {
   width?: number;
@@ -93,12 +95,13 @@ function Input({
           width: width || "100%",
         }}
       >
-        {label && <InputLabel className="mb-2">{label}</InputLabel>}
+        <StyledLabel className={clsx("mb-2", !readOnly && isRequired ? "required-field" : "")} id="select-label">
+          {label}
+        </StyledLabel>
 
         <StyledTextField
           key={label}
           fullWidth={!width}
-          className={!readOnly && isRequired ? "field-required" : ""}
           variant={variant}
           value={value}
           autoComplete="off"
@@ -149,16 +152,6 @@ const textFieldTheme = createTheme({
 const StyledTextField = styled(TextField)`
   position: relative;
 
-  &.field-required .MuiFormLabel-root {
-    top: -8px;
-    &:after {
-      content: "*";
-      color: ${themeColors.colors.redD32};
-      font-size: 20px;
-      line-height: 30px;
-      display: inline-block;
-    }
-  }
   .MuiFormLabel-root {
     top: -3px;
     font-size: 14px;

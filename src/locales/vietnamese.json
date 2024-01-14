@@ -52,6 +52,12 @@
       "status": "Trạng thái"
     }
   },
+  "eventDetailsPage": {
+    "title": "Chi tiết sự kiện"
+  },
+  "createEventPage": {
+    "title": "Tạo mới sự kiện"
+  },
   "permissionsPage": {
     "title": "Phân quyền"
   },
@@ -72,7 +78,13 @@
     "role": "Vai trò",
     "status": "Trạng thái",
     "name": "Tên",
-    "username": "Tên đăng nhập"
+    "username": "Tên đăng nhập",
+    "eventCode": "Mã sự kiện",
+    "startDate": "Ngày bắt đầu",
+    "endDate": "Ngày kết thúc",
+    "company": "Công ty",
+    "address": "Địa điểm",
+    "eventDescription": "Mô tả sự kiện"
   },
   "placeholder": {
     "email": "example@example.com",
@@ -80,7 +92,11 @@
     "role": "Chọn vai trò",
     "status": "Trạng thái",
     "name": "Tên",
-    "username": "Tên đăng nhập"
+    "username": "Tên đăng nhập",
+    "eventCode": "Mã sự kiện",
+    "company": "Chọn công ty",
+    "address": "Địa điểm",
+    "eventDescription": "Nhập mô tả sự kiện ở đây..."
   },
   "error": {
     "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
@@ -88,7 +104,12 @@
     "requiredPassword": "Vui lòng nhập mật khẩu của bạn.",
     "invalidPassword": "Mật khẩu phải có ít nhất 8 ký tự và bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.",
     "requiredRoleName": "Vui lòng nhập tên vai trò.",
-    "requiredGuardName": "Vui lòng nhập tên thiết bị."
+    "requiredGuardName": "Vui lòng nhập tên thiết bị.",
+    "requiredEventCode": "Vui lòng nhập mã sự kiện",
+    "requiredStartDate": "Vui lòng nhập ngày bắt đầu.",
+    "requiredEndDate": "Vui lòng nhập ngày kết thúc.",
+    "requiredCompany": "Vui lòng chọn công ty.",
+    "invalidDate": "Vui lòng nhập ngày hợp lệ."
   },
   "errorApi": {
     "LOGIN_FAILED": "Đăng nhập thất bại.",

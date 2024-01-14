@@ -52,6 +52,12 @@
       "status": "Status"
     }
   },
+  "eventDetailsPage": {
+    "title": "Event Details"
+  },
+  "createEventPage": {
+    "title": "Create New Event"
+  },
   "permissionsPage": {
     "title": "Permissions",
     "messageCode": {}
@@ -73,7 +79,13 @@
     "role": "Role",
     "status": "Status",
     "name": "Name",
-    "username": "Username"
+    "username": "Username",
+    "eventCode": "Event Code",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "company": "Company",
+    "address": "Address",
+    "eventDescription": "Event description"
   },
   "placeholder": {
     "email": "example@example.com",
@@ -81,7 +93,11 @@
     "role": "Select role",
     "status": "Status",
     "name": "Name",
-    "username": "Username"
+    "username": "Username",
+    "eventCode": "Event Code",
+    "company": "Select Company",
+    "address": "Address",
+    "eventDescription": "Write your event description here..."
   },
   "error": {
     "requiredEmail": "Please enter your email address.",
@@ -89,7 +105,12 @@
     "requiredPassword": "Please enter your password.",
     "invalidPassword": "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.",
     "requiredRoleName": "Please enter role name.",
-    "requiredGuardName": "Please enter guard name."
+    "requiredGuardName": "Please enter guard name.",
+    "requiredEventCode": "Please enter event code.",
+    "requiredStartDate": "Please enter start date.",
+    "requiredEndDate": "Please enter end date.",
+    "requiredCompany": "Please select company.",
+    "invalidDate": "Please enter valid date."
   },
   "errorApi": {
     "LOGIN_FAILED": "Login failed.",
