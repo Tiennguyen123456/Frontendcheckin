@@ -1,8 +1,6 @@
-import { AppRoutes, AppRoutesPermissions, ROUTERS_BREADCRUMBS, ROUTES } from "../constants/routes";
+import { ROUTERS_BREADCRUMBS, ROUTES } from "../constants/routes";
+import { AppRoutes } from "../constants/sidebar";
 import { SideBarItemType } from "../models/SideBar";
-import { StyledSeePassword } from "../styles/commons";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { checkPermission } from "../utils/common";
 
 export function checkCurrentPath(pathname: string) {
@@ -137,17 +135,4 @@ export function getAppRoutesBaseOnPermission(userPermissions: string[]) {
   }
 
   return appBarFollowPermission;
-}
-
-export function checkPermissionForAccessSpecificPage(userPermissions: string[], pathname: string) {
-  for (const route of AppRoutesPermissions) {
-    if (route.path === pathname) {
-      const hasPermission = route.permissions.every((permission) => checkPermission(userPermissions, permission));
-      if (hasPermission) {
-        return true;
-      }
-      return false;
-    }
-  }
-  return true;
 }

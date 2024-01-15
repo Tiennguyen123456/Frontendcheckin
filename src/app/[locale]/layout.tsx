@@ -4,35 +4,32 @@ import { NextIntlClientProvider, useLocale, useMessages } from "next-intl";
 import { Roboto } from "next/font/google";
 import ThemeRegistry from "../../theme/ThemeRegistry";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["300", "400", "500", "700", "900"] });
 
 export const metadata: Metadata = {
-	title: "Check-in Dashboard",
-	description: "Check-in Dashboard",
+  title: "Check-in Dashboard",
+  description: "Check-in Dashboard",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-	// ** I18n
-	const locale = useLocale();
-	const messages = useMessages();
+  // ** I18n
+  const locale = useLocale();
+  const messages = useMessages();
 
-	return (
-		<NextIntlClientProvider locale={locale} messages={messages}>
-			<ClerkProvider>
-				<html lang={locale}>
-					<head>
-						<title>Check-in Dashboard</title>
-					</head>
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <html lang={locale}>
+        <head>
+          <title>Check-in Dashboard</title>
+        </head>
 
-					<ThemeRegistry>
-						<body className={roboto.className}>
-							<Provider>{children}</Provider>
-						</body>
-					</ThemeRegistry>
-				</html>
-			</ClerkProvider>
-		</NextIntlClientProvider>
-	);
+        <ThemeRegistry>
+          <body className={roboto.className}>
+            <Provider>{children}</Provider>
+          </body>
+        </ThemeRegistry>
+      </html>
+    </NextIntlClientProvider>
+  );
 }
