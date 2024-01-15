@@ -16,6 +16,8 @@ export const ROUTES = {
   LOGIN: "/login",
   DASHBOARD: "/dashboard",
   EVENTS: "/events",
+  EVENT_CREATE: "/events/create",
+  EVENT_DETAILS: "/events/details",
   CAMPAIGNS: "/campaigns",
   CAMPAIGNS_DETAILS: "/campaigns/details",
   DATA: "/data",
@@ -40,6 +42,14 @@ export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
   {
     name: "Events",
     slug: ROUTES.EVENTS,
+  },
+  {
+    name: "Create Event",
+    slug: ROUTES.EVENT_CREATE,
+  },
+  {
+    name: "Event Details",
+    slug: ROUTES.EVENT_DETAILS,
   },
   {
     name: "Campaigns",
@@ -90,6 +100,8 @@ export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
 export const PRIVATE_ROUTES = [
   ROUTES.DASHBOARD,
   ROUTES.EVENTS,
+  ROUTES.EVENT_CREATE,
+  ROUTES.EVENT_DETAILS,
   ROUTES.CAMPAIGNS,
   ROUTES.CAMPAIGNS_DETAILS,
   ROUTES.DATA,
@@ -268,6 +280,8 @@ export const AppRoutesPermissions = [
   { path: ROUTES.LOGIN, permissions: [] },
   { path: ROUTES.DASHBOARD, permissions: [] },
   { path: ROUTES.EVENTS, permissions: ["event:view", "event_asset:view"] },
+  { path: ROUTES.EVENT_CREATE, permissions: [] },
+  { path: ROUTES.EVENT_DETAILS, permissions: [] },
   { path: ROUTES.CAMPAIGNS, permissions: ["campaign:view"] },
   { path: ROUTES.CAMPAIGNS_DETAILS, permissions: ["campaign:view"] },
   { path: ROUTES.DATA, permissions: [] },

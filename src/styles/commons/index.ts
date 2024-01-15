@@ -226,7 +226,9 @@ export const StyledMenuItem = styled(MenuItem)`
     padding-right: 12px;
   }
 `;
-export const StyledLabel = styled.span`
+export const StyledLabel = styled.span`\
+  display: inline-block;
+
   &.required-field {
     &:after {
       content: "*";

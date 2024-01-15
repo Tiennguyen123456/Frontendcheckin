@@ -39,30 +39,32 @@ export default function DatePickerCustom({
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={datepickerTheme}>
-        <StyledLabel
-          className={clsx("mb-2", !readOnly && isRequired && !disabled ? "required-field" : "")}
-          id="select-label"
-        >
-          {label}
-        </StyledLabel>
+        <div>
+          <StyledLabel
+            className={clsx("mb-2", !readOnly && isRequired && !disabled ? "required-field" : "")}
+            id="select-label"
+          >
+            {label}
+          </StyledLabel>
 
-        <StyledDatePicker
-          format={DateFormat}
-          open={open}
-          onClose={() => setOpen(false)}
-          sx={{ width: width || "100%" }}
-          className={isRequired && !rest.disabled ? "field-required" : ""}
-          slotProps={{
-            field: { clearable: true },
-            textField: {
-              variant: variant,
-              error: error,
-              helperText: helperText,
-              onClick: () => setOpen(true),
-            },
-          }}
-          {...rest}
-        />
+          <StyledDatePicker
+            format={DateFormat}
+            open={open}
+            onClose={() => setOpen(false)}
+            sx={{ width: width || "100%" }}
+            className={isRequired && !rest.disabled ? "field-required" : ""}
+            slotProps={{
+              field: { clearable: true },
+              textField: {
+                variant: variant,
+                error: error,
+                helperText: helperText,
+                onClick: () => setOpen(true),
+              },
+            }}
+            {...rest}
+          />
+        </div>
       </ThemeProvider>
     </LocalizationProvider>
   );
@@ -162,9 +164,7 @@ const StyledDatePicker = styled(DatePicker)`
     }
   }
   .MuiFormHelperText-root.Mui-error {
+    font-size: 14px;
     margin-left: 0;
-    margin-right: 0;
-    position: absolute;
-    bottom: -24px;
   }
 `;
