@@ -89,6 +89,9 @@
       "updateAt": "Ngày cập nhật"
     }
   },
+  "configEventPage": {
+    "title": "Cấu hình sự kiện"
+  },
   "permissionsPage": {
     "title": "Phân quyền"
   },
@@ -103,7 +106,8 @@
     "landingPage": "Landing page",
     "listCard": "Danh sách thiệp mời",
     "importExcel": "Tải lên dữ liệu excel",
-    "exportExcel": "Tải xuống dữ liệu excel"
+    "exportExcel": "Tải xuống dữ liệu excel",
+    "appendField": "Thêm trường"
   },
   "label": {
     "search": "Tìm kiếm",
@@ -129,7 +133,20 @@
     "eventName": "Tên sự kiện",
     "allClients": "Tổng số khách mời",
     "checkInAvailable": "Đã checkin",
-    "notCheckIn": "Chưa checkin"
+    "notCheckIn": "Chưa checkin",
+    "ordinalNumber": "STT",
+    "fieldName": "Tên trường",
+    "description": "Mô tả",
+    "showConfig": "Hiện cấu hình",
+    "configField": "Cấu hình trường",
+    "pc": "PC",
+    "table": "Table",
+    "mobile": "Mobile",
+    "pda": "PDA",
+    "display": "Hiển thị",
+    "bold": "Bold",
+    "italic": "Italic",
+    "font": "Font"
   },
   "placeholder": {
     "email": "example@example.com",
@@ -147,7 +164,9 @@
     "limitEvent": "Giới hạn sự kiện",
     "limitUser": " Giới hạn tài khoản",
     "limitCampaign": "Giới hạn chiến dịch",
-    "eventName": "Tên sự kiện"
+    "eventName": "Tên sự kiện",
+    "fieldName": "Tên trường",
+    "description": "Mô tả"
   },
   "error": {
     "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",

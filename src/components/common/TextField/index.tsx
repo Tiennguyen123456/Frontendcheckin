@@ -95,9 +95,11 @@ function Input({
           width: width || "100%",
         }}
       >
-        <StyledLabel className={clsx("mb-2", !readOnly && isRequired ? "required-field" : "")} id="select-label">
-          {label}
-        </StyledLabel>
+        {label && (
+          <StyledLabel className={clsx("mb-2", !readOnly && isRequired ? "required-field" : "")} id="select-label">
+            {label}
+          </StyledLabel>
+        )}
 
         <StyledTextField
           key={label}

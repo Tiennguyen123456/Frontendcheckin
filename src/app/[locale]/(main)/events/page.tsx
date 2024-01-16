@@ -208,7 +208,7 @@ const EventsPage = (props: Props) => {
   };
 
   const handleClickAddEvent = () => {
-    routerPushWithLocale(ROUTES.EVENT_CREATE);
+    routerPushWithLocale(ROUTES.EVENTS_CREATE);
   };
 
   const handleClickDelete = async (eventId: number) => {

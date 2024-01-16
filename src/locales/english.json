@@ -90,6 +90,9 @@
       "updateAt": "Update at"
     }
   },
+  "configEventPage": {
+    "title": "Config Event"
+  },
   "permissionsPage": {
     "title": "Permissions",
     "messageCode": {}
@@ -105,7 +108,8 @@
     "landingPage": "Landing page",
     "listCard": "List card",
     "importExcel": "Import excel",
-    "exportExcel": "Export excel"
+    "exportExcel": "Export excel",
+    "appendField": "Append Field"
   },
   "label": {
     "search": "Search",
@@ -131,7 +135,19 @@
     "eventName": "Event Name",
     "allClients": "All clients",
     "checkInAvailable": "Checkin available",
-    "notCheckIn": "Not checkin"
+    "notCheckIn": "Not checkin",
+    "ordinalNumber": "No.",
+    "fieldName": "Field Name",
+    "description": "Description",
+    "show": "Show",
+    "configField": "Config Field",
+    "pc": "PC",
+    "table": "Table",
+    "mobile": "Mobile",
+    "display": "Display",
+    "bold": "Bold",
+    "italic": "Italic",
+    "font": "Font"
   },
   "placeholder": {
     "email": "example@example.com",
@@ -149,7 +165,9 @@
     "limitEvent": "Limit Event",
     "limitUser": "Limit User",
     "limitCampaign": "Limit Campaign",
-    "eventName": "Event Name"
+    "eventName": "Event Name",
+    "fieldName": "Field Name",
+    "description": "Description"
   },
   "error": {
     "requiredEmail": "Please enter your email address.",
