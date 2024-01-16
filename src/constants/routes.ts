@@ -34,6 +34,14 @@ export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
     slug: ROUTES.EVENTS,
   },
   {
+    name: "Create Event",
+    slug: ROUTES.EVENT_CREATE,
+  },
+  {
+    name: "Event Details",
+    slug: ROUTES.EVENT_DETAILS,
+  },
+  {
     name: "Campaigns",
     slug: ROUTES.CAMPAIGNS,
   },
@@ -56,6 +64,14 @@ export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
   {
     name: "Company",
     slug: ROUTES.COMPANIES,
+  },
+  {
+    name: "Create Company",
+    slug: ROUTES.COMPANY_CREATE,
+  },
+  {
+    name: "Company Details",
+    slug: ROUTES.COMPANY_DETAILS,
   },
   {
     name: "Accounts",

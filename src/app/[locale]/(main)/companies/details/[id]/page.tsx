@@ -37,7 +37,7 @@ const CompanyDetailsPage = (props: Props) => {
 
   return (
     <div className="p-3">
-      <HeadContent hasBackBtn title={translation("eventDetailsPage.title")}>
+      <HeadContent hasBackBtn title={translation("companyDetailsPage.title")}>
         <div className="hidden md:block">
           <StyledPrimaryButton form="companyForm" type="submit" size="small">
             {translation("action.save")}

@@ -18,7 +18,9 @@ const CreateEventPage = (props: Props) => {
     <div className="p-3">
       <HeadContent hasBackBtn title={translation("createEventPage.title")}>
         <div className="hidden md:block">
-          <StyledPrimaryButton size="small">{translation("action.create")}</StyledPrimaryButton>
+          <StyledPrimaryButton form="eventForm" type="submit" size="small">
+            {translation("action.create")}
+          </StyledPrimaryButton>
         </div>
 
         <CustomIconBtn className="md:hidden">
@@ -28,7 +30,7 @@ const CreateEventPage = (props: Props) => {
 
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <StyledContentWrapper className="md:max-w-[1000px]">
-          <EventDetails />
+          <EventDetails onRefetch={() => {}} />
         </StyledContentWrapper>
       </Box>
     </div>

@@ -55,6 +55,9 @@
   "eventDetailsPage": {
     "title": "Event Details"
   },
+  "companyDetailsPage": {
+    "title": "Company Details"
+  },
   "createEventPage": {
     "title": "Create New Event"
   },
@@ -106,7 +109,8 @@
     "phone": "Phone",
     "limitEvent": "Limit Event",
     "limitUser": "Limit User",
-    "limitCampaign": "Limit Campaign"
+    "limitCampaign": "Limit Campaign",
+    "eventName": "Event Name"
   },
   "placeholder": {
     "email": "example@example.com",
@@ -123,7 +127,8 @@
     "phone": "Phone",
     "limitEvent": "Limit Event",
     "limitUser": "Limit User",
-    "limitCampaign": "Limit Campaign"
+    "limitCampaign": "Limit Campaign",
+    "eventName": "Event Name"
   },
   "error": {
     "requiredEmail": "Please enter your email address.",
@@ -142,7 +147,8 @@
     "requiredStatus": "Please choose your status.",
     "invalidEvent": "Please enter valid number of event.",
     "invalidUser": "Please enter valid number of user.",
-    "invalidCampaign": "Please enter valid number of campaign."
+    "invalidCampaign": "Please enter valid number of campaign.",
+    "requiredEventName": "Please enter your event name."
   },
   "errorApi": {
     "LOGIN_FAILED": "Login failed.",
@@ -156,7 +162,10 @@
     "GET_LIST_PERMISSIONS_FROM_ROLE_FAILED": "Get list permissions from role failed.",
     "CREATE_COMPANY_FAILED": "Create company failed.",
     "UPDATE_COMPANY_FAILED": "Update company failed.",
-    "DELETE_COMPANY_FAILED": "Delete company failed."
+    "DELETE_COMPANY_FAILED": "Delete company failed.",
+    "CREATE_EVENT_FAILED": "Create event failed.",
+    "UPDATE_EVENT_FAILED": "Update event failed.",
+    "DELETE_EVENT_FAILED": "Delete event failed."
   },
   "successApi": {
     "CREATE_ACCOUNT_SUCCESS": "Create account success.",
@@ -168,7 +177,10 @@
     "DELETE_ROLE_SUCCESS": "Delete role success.",
     "CREATE_COMPANY_SUCCESS": "Create company success.",
     "UPDATE_COMPANY_SUCCESS": "Update company success.",
-    "DELETE_COMPANY_SUCCESS": "Delete company success."
+    "DELETE_COMPANY_SUCCESS": "Delete company success.",
+    "CREATE_EVENT_SUCCESS": "Create event success.",
+    "UPDATE_EVENT_SUCCESS": "Update event success.",
+    "DELETE_EVENT_SUCCESS": "Delete event success."
   },
   "localeSwitcher": {
     "en": "English",
@@ -200,7 +212,8 @@
   "deleteRolePopover": {
     "title": "Delete Role",
     "description": "Are you sure you want to delete it?",
-    "titleCompany": "Delete Company"
+    "titleCompany": "Delete Company",
+    "titleEvent": "Delete Event"
   },
   "callOut": {
     "totalEvent": "Total Event",

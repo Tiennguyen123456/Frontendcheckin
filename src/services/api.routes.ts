@@ -21,10 +21,16 @@ const ApiRoutes = {
   deleteUser: baseURL + "/user/delete/",
 
   // ** Company Routes
-  getCompanies: baseURL + "/companys",
+  getCompanies: baseURL + "/companies",
   getCompanyDetails: baseURL + "/company/",
   storeCompany: baseURL + "/company/store",
   deleteCompany: baseURL + "/company/delete/",
+
+  // ** Event Routes
+  getEvents: baseURL + "/events",
+  getEventDetails: baseURL + "/event/",
+  storeEvent: baseURL + "/event/store",
+  deleteEvent: baseURL + "/event/delete/",
 };
 
 export default ApiRoutes;
