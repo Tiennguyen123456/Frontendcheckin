@@ -5,6 +5,11 @@ import { api } from "../configs/axios.config";
 import ApiRoutes from "./api.routes";
 
 const companyApi = {
+  getCompanies: async () => {
+    const response = await api.get<IResponse<IListRes<ICompanyRes>>>(ApiRoutes.getCompanies);
+    return response.data.data;
+  },
+
   getCompaniesWithParams: async (model: any) => {
     const response = await api.get<IResponse<IListRes<ICompanyRes>>>(ApiRoutes.getCompanies, {
       params: model,

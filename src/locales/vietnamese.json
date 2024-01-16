@@ -55,6 +55,9 @@
   "eventDetailsPage": {
     "title": "Chi tiết sự kiện"
   },
+  "companyDetailsPage": {
+    "title": "Chi tiết công ty"
+  },
   "createEventPage": {
     "title": "Tạo mới sự kiện"
   },
@@ -105,7 +108,8 @@
     "phone": "Số điện thoại",
     "limitEvent": "Giới hạn sự kiện",
     "limitUser": " Giới hạn tài khoản",
-    "limitCampaign": "Giới hạn chiến dịch"
+    "limitCampaign": "Giới hạn chiến dịch",
+    "eventName": "Tên sự kiện"
   },
   "placeholder": {
     "email": "example@example.com",
@@ -122,7 +126,8 @@
     "phone": "Số điện thoại",
     "limitEvent": "Giới hạn sự kiện",
     "limitUser": " Giới hạn tài khoản",
-    "limitCampaign": "Giới hạn chiến dịch"
+    "limitCampaign": "Giới hạn chiến dịch",
+    "eventName": "Tên sự kiện"
   },
   "error": {
     "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
@@ -141,7 +146,8 @@
     "requiredStatus": "Vui lòng chọn trạng thái.",
     "invalidEvent": "Vui lòng nhập số sự kiện hợp lệ.",
     "invalidUser": "Vui lòng nhập số tài khoản hợp lệ.",
-    "invalidCampaign": "Vui lòng nhập số chiến dịch hợp lệ."
+    "invalidCampaign": "Vui lòng nhập số chiến dịch hợp lệ.",
+    "requiredEventName": "Vui lòng nhập tên sự kiện."
   },
   "errorApi": {
     "LOGIN_FAILED": "Đăng nhập thất bại.",
@@ -155,7 +161,10 @@
     "GET_LIST_PERMISSIONS_FROM_ROLE_FAILED": "Lấy danh sách phân quyền thất bại.",
     "CREATE_COMPANY_FAILED": "Tạo mới công ty thất bại.",
     "UPDATE_COMPANY_FAILED": "Chỉnh sửa thông tin công ty thất bại.",
-    "DELETE_COMPANY_FAILED": "Xoá công ty thất bại."
+    "DELETE_COMPANY_FAILED": "Xoá công ty thất bại.",
+    "CREATE_EVENT_FAILED": "Tạo mới sự kiện thất bại.",
+    "UPDATE_EVENT_FAILED": "Chỉnh sửa sự kiện thất bại.",
+    "DELETE_EVENT_FAILED": "Xoá sự kiện thật bại."
   },
   "successApi": {
     "CREATE_ACCOUNT_SUCCESS": "Tạo mới tài khoản thành công.",
@@ -167,7 +176,10 @@
     "DELETE_ROLE_SUCCESS": "Xoá vai trò thành công.",
     "CREATE_COMPANY_SUCCESS": "Tạo công ty thành công.",
     "UPDATE_COMPANY_SUCCESS": "Chỉnh sửa thông tin công ty thành công.",
-    "DELETE_COMPANY_SUCCESS": "Xoá công ty thành công."
+    "DELETE_COMPANY_SUCCESS": "Xoá công ty thành công.",
+    "CREATE_EVENT_SUCCESS": "Tạo mới sự kiện thành công.",
+    "UPDATE_EVENT_SUCCESS": "Chỉnh sửa sự kiện thành công.",
+    "DELETE_EVENT_SUCCESS": "Xoá sự kiện thành công."
   },
   "localeSwitcher": {
     "en": "Tiếng Anh",
@@ -199,7 +211,8 @@
   "deleteRolePopover": {
     "title": "Xóa Vai Trò",
     "description": "Bạn có chắc chắn là bạn muốn xóa nó không?",
-    "titleCompany": "Xoá thông tin công ty"
+    "titleCompany": "Xoá thông tin công ty",
+    "titleEvent": "Xoá sự kiện"
   },
   "callOut": {
     "totalEvent": "Tổng sự kiện",

@@ -25,76 +25,22 @@ import SearchIcon from "@mui/icons-material/Search";
 import Table from "../../../../components/common/Table";
 import { getColorTagEventStatus, getTextEventStatus } from "../../../../utils/common";
 import CustomIconBtn from "../../../../components/common/Button/CustomIconBtn";
-import { EventStatusOptions } from "../../../../constants/variables";
+import { DateFormat, EventStatusOptions } from "../../../../constants/variables";
 import SettingsIcon from "@mui/icons-material/Settings";
 import GroupsIcon from "@mui/icons-material/Groups";
 import { useRouter } from "next/router";
 import useCustomRouter from "../../../../hooks/useCustomRouter";
 import { ROUTES } from "../../../../constants/routes";
+import { IEventRes } from "@/models/api/event-api";
+import eventApi from "@/services/event-api";
+import dayjs from "dayjs";
+import { toastError, toastSuccess } from "@/utils/toast";
 
 type Props = {};
 
-type EventRowType = {
-  id: number;
-  code: string;
-  name: string;
-  start_date: string;
-  end_date: string;
-  number_of_guests: number;
-  status: string;
-};
-
-interface IEventDataTable extends IDataTable<EventRowType> {
-  enabled: any;
+interface IEventDataTable extends IDataTable<IEventRes> {
+  status: any;
 }
-
-const rows: EventRowType[] = [
-  {
-    id: 1,
-    code: "20230101",
-    end_date: "2024-01-20",
-    name: "BIDV event",
-    number_of_guests: 231,
-    start_date: "2024-01-20",
-    status: "NEW",
-  },
-  {
-    id: 2,
-    code: "20230101",
-    end_date: "2023-12-20",
-    name: "BBB event",
-    number_of_guests: 123,
-    start_date: "2023-12-20",
-    status: "ACTIVE",
-  },
-  {
-    id: 3,
-    code: "20230101",
-    end_date: "2023-12-20",
-    name: "BBB event",
-    number_of_guests: 123,
-    start_date: "2023-12-20",
-    status: "INACTIVE",
-  },
-  {
-    id: 4,
-    code: "20230101",
-    end_date: "2023-12-20",
-    name: "BBB event",
-    number_of_guests: 123,
-    start_date: "2023-12-20",
-    status: "DONE",
-  },
-  {
-    id: 5,
-    code: "20230101",
-    end_date: "2023-12-20",
-    name: "BBB event",
-    number_of_guests: 123,
-    start_date: "2023-12-20",
-    status: "CANCEL",
-  },
-];
 
 const EventsPage = (props: Props) => {
   // ** I18n
@@ -107,7 +53,7 @@ const EventsPage = (props: Props) => {
   const [loadingTable, setLoadingTable] = useState(false);
   const [dataTable, setDataTable] = useState<IEventDataTable>({
     search: "",
-    list: rows,
+    list: [],
     totalItems: 0,
     paginationModel: {
       page: 0,
@@ -116,29 +62,34 @@ const EventsPage = (props: Props) => {
     pageSizeOptions: [10, 20, 50, 100],
     sortModel: [],
     rowSelectionModel: [],
-    enabled: {},
+    status: {},
   });
 
   const columns: GridColDef[] = [
     {
       field: "code",
-      headerName: translation("eventsPage.table.name"),
+      headerName: translation("eventsPage.table.code"),
       minWidth: 200,
       flex: 1,
     },
     {
       field: "name",
-      headerName: translation("eventsPage.table.code"),
+      headerName: translation("eventsPage.table.name"),
       sortable: false,
       minWidth: 250,
       flex: 1,
     },
     {
-      field: "start_date",
+      field: "from_date",
       headerName: translation("eventsPage.table.startDate"),
       sortable: false,
       minWidth: 250,
       flex: 1,
+      renderCell: ({ row }) => (
+        <span>
+          {dayjs(row.from_date).isValid() ? dayjs(row.update_at).format(DateFormat) : translation("label.notAvailable")}
+        </span>
+      ),
     },
     {
       field: "end_date",
@@ -146,6 +97,11 @@ const EventsPage = (props: Props) => {
       sortable: false,
       minWidth: 250,
       flex: 1,
+      renderCell: ({ row }) => (
+        <span>
+          {dayjs(row.end_date).isValid() ? dayjs(row.update_at).format(DateFormat) : translation("label.notAvailable")}
+        </span>
+      ),
     },
     {
       field: "number_of_guests",
@@ -179,7 +135,7 @@ const EventsPage = (props: Props) => {
           <IconButton>
             <SettingsIcon />
           </IconButton>
-          <IconButton aria-label="edit">
+          <IconButton aria-label="edit" onClick={() => handleClickEdit(row.id)}>
             <EditIcon sx={{ color: themeColors.colors.blue219 }} />
           </IconButton>
           <IconButton>
@@ -187,8 +143,8 @@ const EventsPage = (props: Props) => {
           </IconButton>
           <ConfirmPopover
             id={row?.name}
-            onConfirm={() => {}}
-            mainTitle={translation("deleteRolePopover.title")}
+            onConfirm={() => handleClickDelete(row.id)}
+            mainTitle={translation("deleteRolePopover.titleEvent")}
             subtitle={translation("deleteRolePopover.description")}
             icon={<DeleteIcon sx={{ color: themeColors.colors.redD32, height: "20px", width: "20px" }} />}
           />
@@ -202,6 +158,10 @@ const EventsPage = (props: Props) => {
     setDataTable((prevDataTable) => ({ ...prevDataTable, [name]: value }));
   };
 
+  const handleClickEdit = (eventId: number) => {
+    routerPushWithLocale(ROUTES.EVENT_DETAILS + `/${eventId}`);
+  };
+
   const handleFetchData = async () => {
     try {
       setLoadingTable(true);
@@ -211,31 +171,29 @@ const EventsPage = (props: Props) => {
         size: dataTable.paginationModel.pageSize,
       };
 
-      if (dataTable.search) {
-        modalSearch["search"] = dataTable.search;
-      }
+      // if (dataTable.search) {
+      //   modalSearch["search"] = dataTable.search;
+      // }
 
-      if (dataTable.enabled?.value !== null && dataTable.enabled?.value !== undefined) {
-        modalSearch["enabled"] = dataTable.enabled.value;
-      }
+      // if (dataTable.enabled?.value !== null && dataTable.enabled?.value !== undefined) {
+      //   modalSearch["enabled"] = dataTable.enabled.value;
+      // }
 
       // if (dataTable.sortModel.length > 0) {
       // 	modalSearch["sort"] = sortKeys[dataTable.sortModel?.[0]?.field];
       // 	modalSearch["sortType"] = dataTable.sortModel?.[0]?.sort.toUpperCase();
       // }
 
-      // const response = await getAuthorityListService(modalSearch);
-      // if (response.data.success) {
-      // 	const { result_info } = response.data;
-      // 	setDataTable({
-      // 		...dataTable,
-      // 		list: result_info?.results,
-      // 		totalItems: result_info?.total_items,
-      // 	});
-      // 	setLoadingTable(false);
-      // }
-    } catch (error) {
+      const response = await eventApi.getEventsWithParams(modalSearch);
+      if (response.status === "success") {
+        setDataTable((preValue) => ({
+          ...preValue,
+          list: response.data.collection,
+          totalItems: response.data.pagination.meta.total,
+        }));
+      }
       setLoadingTable(false);
+    } catch (error) {
       console.log("error: ", error);
     }
   };
@@ -244,8 +202,29 @@ const EventsPage = (props: Props) => {
     routerPushWithLocale(ROUTES.EVENT_CREATE);
   };
 
+  const handleClickDelete = async (eventId: number) => {
+    try {
+      setLoadingTable(false);
+      const response = await eventApi.deleteEvent(eventId);
+      if (response.status === "success") {
+        toastSuccess(translation("successApi.DELETE_EVENT_SUCCESS"));
+        handleFetchData();
+        setLoadingTable(true);
+      }
+    } catch (error: any) {
+      setLoadingTable(false);
+
+      const data = error?.response?.data;
+      if (data?.message_code) {
+        toastError(translation(`errorApi.${data?.message_code}`));
+      } else {
+        toastError(translation("errorApi.DELETE_EVENT_FAILED"));
+      }
+    }
+  };
+
   useEffect(() => {
-    // handleFetchData();
+    handleFetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataTable.paginationModel, dataTable.sortModel]);
 
@@ -279,7 +258,7 @@ const EventsPage = (props: Props) => {
         <div className="flex flex-wrap gap-x-3 gap-y-4 mb-5">
           <div className="w-full md:w-52">
             <Input
-              label="Search"
+              label={translation("label.search")}
               placeholder={"Name, Code"}
               value={dataTable.search}
               onChange={(search) => handleTableChange("search", search)}
@@ -288,7 +267,7 @@ const EventsPage = (props: Props) => {
           <div className="w-1/2 md:w-32">
             <AutoComplete
               label={translation("label.active")}
-              value={dataTable.enabled}
+              value={dataTable.status}
               options={EventStatusOptions}
               onChange={(data) => handleTableChange("enabled", data)}
             />
