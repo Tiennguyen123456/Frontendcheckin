@@ -10,6 +10,16 @@ const accountApi = {
     });
     return response.data;
   },
+
+  storeUser: async (body: any) => {
+    const response = await api.post<IResponse<IAccountRes>>(ApiRoutes.storeUser, body);
+    return response.data;
+  },
+
+  deleteUser: async (id: number) => {
+    const response = await api.delete<IResponse<IAccountRes>>(ApiRoutes.deleteUser + id);
+    return response.data;
+  },
 };
 
 export default accountApi;

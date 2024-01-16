@@ -21,3 +21,8 @@ export enum AccountStatus {
   New = "NEW",
   Active = "ACTIVE",
 }
+
+export enum CompanyStatus {
+  New = "NEW",
+  Active = "ACTIVE",
+}
