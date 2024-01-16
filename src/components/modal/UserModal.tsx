@@ -1,10 +1,16 @@
 import BasicModal from "@/components/modal";
 // import { createUserService, updateUserService } from "@/services/account";
+import { AccountStatus } from "@/constants/enum";
+import { emailRegex } from "@/constants/variables";
+import { IAccountRes } from "@/models/api/account-api";
+import { IRoleRes } from "@/models/api/authority-api";
+import accountApi from "@/services/account-api";
+import authorityApi from "@/services/authority-api";
 import { StyledPrimaryButton, StyledSecondaryButton } from "@/styles/commons";
 import { themeColors } from "@/theme/theme";
 import { toastError, toastSuccess } from "@/utils/toast";
 import styled from "@emotion/styled";
-import { Grid } from "@mui/material";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -12,22 +18,28 @@ import * as yup from "yup";
 import CustomCheckbox from "../common/Checkbox";
 import SelectField from "../common/Select";
 import Input from "../common/TextField";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import { IRoleRes } from "@/models/api/authority-api";
-import authorityApi from "@/services/authority-api";
 
 const { yupResolver } = require("@hookform/resolvers/yup");
+
+type Props = {
+  show: boolean;
+  onClose: () => void;
+  onRefresh: () => void;
+  defaultUser: IAccountRes | undefined;
+};
+
 const defaultValues = {
   name: "",
   username: "",
   email: "",
   role: "",
-  status: "",
+  status: false,
 };
 
-export default function UserModal({ show, dataEditing, onRefresh, onClose }: any) {
+export default function UserModal({ show, onClose, onRefresh, defaultUser }: Props) {
   const [loading, setLoading] = useState(false);
   const translation = useTranslations();
+  const [isEdit, setIsEdit] = useState(false);
   const [roles, setRoles] = useState<IRoleRes[]>([]);
 
   const handleGetRoles = async () => {
@@ -36,16 +48,14 @@ export default function UserModal({ show, dataEditing, onRefresh, onClose }: any
   };
 
   const userSchema = yup.object().shape({
-    name: yup.string(),
-    // .required(messages["userModal.required.firstName"]),
-    username: yup.string(),
-    // .required(messages["userModal.required.lastName"]),
-    email: yup.string(),
-    // .required(messages["userModal.required.email"])
-    // .matches(emailRegex, messages["agencyPage.form.regex.email"]),
-    role: yup.string(),
-    // .required(messages["userModal.required.role"]),
-    status: yup.string(),
+    name: yup.string().required(translation("error.requiredName")),
+    username: yup.string().required(translation("error.requiredUserName")),
+    email: yup
+      .string()
+      .required(translation("error.requiredEmail"))
+      .matches(emailRegex, translation("error.invalidEmail")),
+    role: yup.string().required(translation("error.requiredRoleName")),
+    status: yup.bool(),
   });
 
   const {
@@ -60,45 +70,54 @@ export default function UserModal({ show, dataEditing, onRefresh, onClose }: any
     defaultValues: defaultValues,
   });
 
-  const handleCreateEditUser = async (values: any) => {
-    // try {
-    //   setLoading(true);
-    //   let message = "";
-    //   const model = {
-    //     name: values.email,
-    //     username: values.firstName,
-    //     email: values.lastName,
-    //     role: values.role,
-    //     status: values.status,
-    //   };
-    //   const response = dataEditing?.id
-    //     ? await updateUserService(dataEditing?.id, model)
-    //     : await createUserService(model);
-    //   if (response.data?.success) {
-    //     message = dataEditing?.id
-    //       ? translation("successApi.UPDATE_ACCOUNT_SUCCESS")
-    //       : translation("successApi.CREATE_ACCOUNT_SUCCESS");
-    //     toastSuccess(message);
-    //     setLoading(false);
-    //     onClose();
-    //     onRefresh();
-    //   } else {
-    //     message = dataEditing?.id
-    //       ? translation("errorApi.UPDATE_ACCOUNT_FAILED")
-    //       : translation("errorApi.CREATE_ACCOUNT_FAILED");
-    //     toastError(message);
-    //     setLoading(false);
-    //   }
-    // } catch (error: any) {
-    //   // const result_info = error?.response?.data?.result_info;
-    //   // if (result_info?.results?.[0]?.error_msg) {
-    //   //   alertError(messages[result_info.results[0].error_msg]);
-    //   // } else {
-    //   //   alertError(messages[dataEditing ? "UPDATE_USER_FAILED" : "CREATE_USER_FAILED"]);
-    //   // }
-    //   toastError(error);
-    //   setLoading(false);
-    // }
+  const handleStoreUser = async (values: any) => {
+    try {
+      setLoading(true);
+
+      let response: IResponse<IAccountRes>;
+
+      if (isEdit) {
+        const body = {
+          id: defaultUser?.id,
+          role_id: values.role,
+          name: values.name,
+          username: values.username,
+          email: values.email,
+          status: values.status === true ? AccountStatus.Active : AccountStatus.New,
+        };
+        response = await accountApi.storeUser(body);
+      } else {
+        const body = {
+          role_id: values.role,
+          name: values.name,
+          username: values.username,
+          email: values.email,
+          status: values.status === true ? AccountStatus.Active : AccountStatus.New,
+        };
+
+        response = await accountApi.storeUser(body);
+      }
+      if (response.status === "success") {
+        onRefresh();
+        toastSuccess(
+          isEdit ? translation("successApi.UPDATE_ACCOUNT_SUCCESS") : translation("successApi.CREATE_ACCOUNT_SUCCESS"),
+        );
+        handleCloseModal();
+        setLoading(false);
+      }
+    } catch (error: any) {
+      setLoading(false);
+      console.log("error: ", error);
+
+      const data = error?.response?.data;
+      if (data?.message_code) {
+        toastError(translation(`errorApi.${data?.message_code}`));
+      } else {
+        isEdit
+          ? toastError(translation("errorApi.UPDATE_ACCOUNT_FAILED"))
+          : toastError(translation("errorApi.CREATE_ACCOUNT_FAILED"));
+      }
+    }
   };
 
   useEffect(() => {
@@ -112,23 +131,30 @@ export default function UserModal({ show, dataEditing, onRefresh, onClose }: any
   };
 
   useEffect(() => {
-    if (dataEditing) {
+    if (defaultUser && roles?.length > 0) {
+      setIsEdit(true);
       reset({
-        name: dataEditing.name,
-        username: dataEditing.username,
-        email: dataEditing.email,
-        role: dataEditing.roles?.[0]?.name,
-        status: dataEditing.enabled,
+        name: defaultUser.name,
+        username: defaultUser.username,
+        email: defaultUser.email,
+        role:
+          defaultUser.roles && defaultUser.roles.length > 0
+            ? roles.find((item) => item.name === defaultUser.roles[0])?.id.toString()
+            : "",
+
+        status: defaultUser.status === AccountStatus.Active ? true : false,
       });
+    } else {
+      setIsEdit(false);
+      reset(defaultValues);
     }
-  }, [dataEditing]);
+  }, [defaultUser, roles.length]);
 
   return (
     <BasicModal
-      title={dataEditing?.id ? translation("action.edit") : translation("action.create")}
+      title={isEdit ? translation("action.edit") : translation("action.create")}
       open={show}
       onClose={handleCloseModal}
-      width={520}
       footer={
         <>
           <StyledSecondaryButton
@@ -140,12 +166,12 @@ export default function UserModal({ show, dataEditing, onRefresh, onClose }: any
             {translation("action.cancel")}
           </StyledSecondaryButton>
           <StyledPrimaryButton loading={loading} loadingPosition="start" form="userForm" type="submit">
-            {dataEditing?.id ? translation("action.save") : translation("action.create")}
+            {isEdit ? translation("action.save") : translation("action.create")}
           </StyledPrimaryButton>
         </>
       }
     >
-      <StyledFormSection id="userForm" onSubmit={handleSubmit(handleCreateEditUser)}>
+      <StyledFormSection id="userForm" onSubmit={handleSubmit(handleStoreUser)}>
         <Controller
           control={control}
           name="name"
@@ -206,7 +232,7 @@ export default function UserModal({ show, dataEditing, onRefresh, onClose }: any
             <SelectField
               isRequired
               value={field.value}
-              options={[...roles.map((role) => ({ label: role.name, value: role.name }))]}
+              options={[...roles.map((role) => ({ label: role.name, value: role.id }))]}
               fullWidth
               label={translation("label.role")}
               error={Boolean(errors?.role?.message)}
@@ -222,7 +248,7 @@ export default function UserModal({ show, dataEditing, onRefresh, onClose }: any
           render={({ field }) => (
             <CustomCheckbox
               label={translation("label.status")}
-              checked={field.value === "ACTIVE" ? true : false}
+              checked={field.value}
               onChange={(value) => field.onChange(value)}
             />
           )}

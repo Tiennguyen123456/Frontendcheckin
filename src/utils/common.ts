@@ -1,4 +1,4 @@
-import { AccountStatus, EventStatus } from "../constants/enum";
+import { AccountStatus, CompanyStatus, EventStatus } from "../constants/enum";
 import { locales } from "../i18n-configurations/config";
 
 export function getColorTagEventStatus(eventStatus: string) {
@@ -51,6 +51,17 @@ export function getTextAccountStatus(accountStatus: string) {
     case AccountStatus.Active:
       return "Active";
     case AccountStatus.New:
+      return "New";
+    default:
+      return "";
+  }
+}
+
+export function getTextCompanyStatus(companyStatus: string) {
+  switch (companyStatus) {
+    case CompanyStatus.Active:
+      return "Active";
+    case CompanyStatus.New:
       return "New";
     default:
       return "";

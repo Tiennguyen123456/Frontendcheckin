@@ -8,6 +8,7 @@ export const ScreenWidth = {
 
 export const emailRegex = new RegExp(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
 export const passwordRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
+export const numberRegex = new RegExp(/^(\d+)?$/);
 
 export const DateTimeFormat = "DD/MM/YYYY hh:mm A";
 
@@ -29,4 +30,9 @@ export const EventStatusOptions = [
   { label: "Inactive", value: "INACTIVE" },
   { label: "Done", value: "DONE" },
   { label: "Cancel", value: "CANCEL" },
+];
+
+export const CompanyStatus = [
+  { label: "Active", value: "ACTIVE" },
+  { label: "New", value: "NEW" },
 ];

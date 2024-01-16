@@ -17,6 +17,14 @@ const ApiRoutes = {
 
   // ** Account Routes
   getUsers: baseURL + "/users",
+  storeUser: baseURL + "/user/store",
+  deleteUser: baseURL + "/user/delete/",
+
+  // ** Company Routes
+  getCompanies: baseURL + "/companys",
+  getCompanyDetails: baseURL + "/company/",
+  storeCompany: baseURL + "/company/store",
+  deleteCompany: baseURL + "/company/delete/",
 };
 
 export default ApiRoutes;

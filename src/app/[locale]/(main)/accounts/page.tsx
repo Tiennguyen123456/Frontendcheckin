@@ -6,9 +6,9 @@ import Table from "@/components/common/Table";
 import Input from "@/components/common/TextField";
 import UserModal from "@/components/modal/UserModal";
 import { DateTimeFormat, UserStatus } from "@/constants/variables";
-import { IDataTable } from "@/models/Table";
 import { IAccountRes } from "@/models/api/account-api";
 import { IRoleRes } from "@/models/api/authority-api";
+import { IDataTable } from "@/models/Table";
 import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
 import accountApi from "@/services/account-api";
@@ -23,16 +23,15 @@ import {
   StyledPrimaryButton,
 } from "@/styles/commons";
 import { themeColors } from "@/theme/theme";
+import { toastError, toastSuccess } from "@/utils/toast";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
-import { Box, Grid, IconButton } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Box, IconButton } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import CustomIconBtn from "../../../../components/common/Button/CustomIconBtn";
 import { getColorTagAccountStatus, getTextAccountStatus } from "../../../../utils/common";
@@ -52,15 +51,14 @@ interface IAccountDataTable extends IDataTable<IAccountRes> {
 }
 
 const AccountsPage = () => {
-  const router = useRouter();
   const translation = useTranslations();
 
   const { userProfile } = useAppSelector(selectUser);
   const [roles, setRoles] = useState<IRoleRes[]>([]);
+  const [selectedRow, setSelectedRow] = useState<IAccountRes>();
 
   const [loadingTable, setLoadingTable] = useState(true);
   const [isOpenModal, setOpenModal] = useState(false);
-  const [dataEditing, setDataEditing] = useState();
   const [dataTable, setDataTable] = useState<IAccountDataTable>({
     search: "",
     list: [],
@@ -167,7 +165,7 @@ const AccountsPage = () => {
                     <IconButton
                       onClick={(event) => {
                         event.stopPropagation();
-                        handleClickEdit(row.id);
+                        handleClickEdit(row);
                       }}
                       aria-label="edit"
                     >
@@ -192,7 +190,7 @@ const AccountsPage = () => {
                         <IconButton
                           onClick={(event) => {
                             event.stopPropagation();
-                            handleClickEdit(row.id);
+                            handleClickEdit(row);
                           }}
                           aria-label="edit"
                         >
@@ -262,11 +260,31 @@ const AccountsPage = () => {
     }
   };
 
-  const handleClickEdit = (userId: number) => {
-    router.push(`/configurations/users/user-details/${userId}?content=details`);
+  const handleClickEdit = (user: any) => {
+    setSelectedRow(user);
+    setOpenModal(true);
   };
 
-  const handleDeleteUser = async (userId: number) => {};
+  const handleDeleteUser = async (userId: number) => {
+    try {
+      setLoadingTable(false);
+      const response = await accountApi.deleteUser(userId);
+      if (response.status === "success") {
+        toastSuccess(translation("successApi.DELETE_ACCOUNT_SUCCESS"));
+        handleFetchData();
+        setLoadingTable(true);
+      }
+    } catch (error: any) {
+      setLoadingTable(false);
+
+      const data = error?.response?.data;
+      if (data?.message_code) {
+        toastError(translation(`errorApi.${data?.message_code}`));
+      } else {
+        toastError(translation("errorApi.DELETE_ACCOUNT_FAILED"));
+      }
+    }
+  };
 
   useEffect(() => {
     if (roles?.length === 0) handleGetRoles();
@@ -340,12 +358,12 @@ const AccountsPage = () => {
       {isOpenModal && (
         <UserModal
           show={isOpenModal}
-          dataEditing={dataEditing}
           onClose={() => {
-            // setDataEditing();
+            setSelectedRow(undefined);
             setOpenModal(!isOpenModal);
           }}
           onRefresh={handleFetchData}
+          defaultUser={selectedRow}
         />
       )}
     </div>
