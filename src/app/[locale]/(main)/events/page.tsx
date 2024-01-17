@@ -1,40 +1,41 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import HeadContent from "../../../../components/common/HeadContent";
-import { useTranslations } from "next-intl";
-import { IDataTable } from "../../../../models/Table";
+import { IEventRes } from "@/models/api/event-api";
+import eventApi from "@/services/event-api";
+import { toastError, toastSuccess } from "@/utils/toast";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import GroupsIcon from "@mui/icons-material/Groups";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import SearchIcon from "@mui/icons-material/Search";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { Box, IconButton } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
+import dayjs from "dayjs";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import AutoComplete from "../../../../components/common/AutoComplete";
+import CustomIconBtn from "../../../../components/common/Button/CustomIconBtn";
+import HeadContent from "../../../../components/common/HeadContent";
+import ConfirmPopover from "../../../../components/common/Popover";
+import Table from "../../../../components/common/Table";
+import Input from "../../../../components/common/TextField";
+import { ROUTES } from "../../../../constants/routes";
+import { DateFormat, EventStatusOptions } from "../../../../constants/variables";
+import useCustomRouter from "../../../../hooks/useCustomRouter";
+import { IDataTable } from "../../../../models/Table";
 import {
   StyledActionGroup,
   StyledChip,
   StyledContentWrapper,
   StyledIconBtn,
+  StyledLink,
   StyledPrimaryButton,
   StyledSecondaryButton,
 } from "../../../../styles/commons";
-import { IconButton, Grid } from "@mui/material";
-import AutoComplete from "../../../../components/common/AutoComplete";
-import ConfirmPopover from "../../../../components/common/Popover";
 import { themeColors } from "../../../../theme/theme";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import Input from "../../../../components/common/TextField";
-import SearchIcon from "@mui/icons-material/Search";
-import Table from "../../../../components/common/Table";
 import { getColorTagEventStatus, getTextEventStatus } from "../../../../utils/common";
-import CustomIconBtn from "../../../../components/common/Button/CustomIconBtn";
-import { DateFormat, EventStatusOptions } from "../../../../constants/variables";
-import SettingsIcon from "@mui/icons-material/Settings";
-import GroupsIcon from "@mui/icons-material/Groups";
-import { useRouter } from "next/router";
-import useCustomRouter from "../../../../hooks/useCustomRouter";
-import { ROUTES } from "../../../../constants/routes";
-import { IEventRes } from "@/models/api/event-api";
-import eventApi from "@/services/event-api";
-import dayjs from "dayjs";
-import { toastError, toastSuccess } from "@/utils/toast";
 
 type Props = {};
 
@@ -78,6 +79,14 @@ const EventsPage = (props: Props) => {
       sortable: false,
       minWidth: 250,
       flex: 1,
+      renderCell: ({ row }) => (
+        <div>
+          <StyledLink href={ROUTES.CLIENTS} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Box sx={{ columnGap: "6px", marginRight: "4px" }}>{row?.name || translation("label.notAvailable")}</Box>
+            <AccountBoxIcon />
+          </StyledLink>
+        </div>
+      ),
     },
     {
       field: "from_date",

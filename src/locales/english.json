@@ -52,6 +52,19 @@
       "status": "Status"
     }
   },
+  "clientsPage": {
+    "title": "Clients",
+    "table": {
+      "checkIn": "Check in",
+      "scanTime": "Scan time",
+      "name": "Full name",
+      "qrCode": "QR code",
+      "email": "Email",
+      "phone": "Phone",
+      "type": "Type",
+      "status": "Status"
+    }
+  },
   "eventDetailsPage": {
     "title": "Event Details"
   },
@@ -87,7 +100,12 @@
     "cancel": "Cancel",
     "create": "Create",
     "save": "Save",
-    "edit": "Edit"
+    "edit": "Edit",
+    "approve": "Approve",
+    "landingPage": "Landing page",
+    "listCard": "List card",
+    "importExcel": "Import excel",
+    "exportExcel": "Export excel"
   },
   "label": {
     "search": "Search",
@@ -110,7 +128,10 @@
     "limitEvent": "Limit Event",
     "limitUser": "Limit User",
     "limitCampaign": "Limit Campaign",
-    "eventName": "Event Name"
+    "eventName": "Event Name",
+    "allClients": "All clients",
+    "checkInAvailable": "Checkin available",
+    "notCheckIn": "Not checkin"
   },
   "placeholder": {
     "email": "example@example.com",
@@ -214,6 +235,10 @@
     "description": "Are you sure you want to delete it?",
     "titleCompany": "Delete Company",
     "titleEvent": "Delete Event"
+  },
+  "checkInPopover": {
+    "title": "Check in",
+    "description": "Are you sure to checkin for "
   },
   "callOut": {
     "totalEvent": "Total Event",

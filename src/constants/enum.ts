@@ -26,3 +26,7 @@ export enum CompanyStatus {
   New = "NEW",
   Active = "ACTIVE",
 }
+
+export enum ACTION {
+  Approve = "APPROVE",
+}

@@ -21,6 +21,7 @@ export const ROUTES = {
   PERMISSIONS: "/permissions",
   LANGUAGES: "/languages",
   CONFIGURATIONS: "/configurations",
+  CLIENTS: "/clients",
   403: "/403",
 };
 
@@ -93,6 +94,10 @@ export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
     name: "Configurations",
     slug: ROUTES.CONFIGURATIONS,
   },
+  {
+    name: "Clients",
+    slug: ROUTES.CLIENTS,
+  },
 ];
 
 export const PRIVATE_ROUTES = [
@@ -111,6 +116,7 @@ export const PRIVATE_ROUTES = [
   ROUTES.PERMISSIONS,
   ROUTES.LANGUAGES,
   ROUTES.CONFIGURATIONS,
+  ROUTES.CLIENTS,
   ROUTES[403],
 ];
 
@@ -131,5 +137,6 @@ export const AppRoutesPermissions = [
   { path: ROUTES.PERMISSIONS, permissions: ["user_permission:view"] },
   { path: ROUTES.LANGUAGES, permissions: ["language:view"] },
   { path: ROUTES.CONFIGURATIONS, permissions: ["event:config"] },
+  { path: ROUTES.CLIENTS, permissions: [] },
   { path: ROUTES[403], permissions: [] },
 ];
