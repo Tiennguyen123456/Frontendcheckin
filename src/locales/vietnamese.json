@@ -52,6 +52,18 @@
       "status": "Trạng thái"
     }
   },
+  "clientsPage": {
+    "title": "Danh sách khách mời",
+    "table": {
+      "scanTime": "Giờ checkin",
+      "name": "Họ tên",
+      "qrCode": "QR code",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "type": "Loại",
+      "status": "Trạng thái"
+    }
+  },
   "eventDetailsPage": {
     "title": "Chi tiết sự kiện"
   },
@@ -86,7 +98,12 @@
     "cancel": "Hủy",
     "create": "Tạo mới",
     "save": "Lưu",
-    "edit": "Cập nhật"
+    "edit": "Cập nhật",
+    "approve": "Xác nhận",
+    "landingPage": "Landing page",
+    "listCard": "Danh sách thiệp mời",
+    "importExcel": "Tải lên dữ liệu excel",
+    "exportExcel": "Tải xuống dữ liệu excel"
   },
   "label": {
     "search": "Tìm kiếm",
@@ -109,7 +126,10 @@
     "limitEvent": "Giới hạn sự kiện",
     "limitUser": " Giới hạn tài khoản",
     "limitCampaign": "Giới hạn chiến dịch",
-    "eventName": "Tên sự kiện"
+    "eventName": "Tên sự kiện",
+    "allClients": "Tổng số khách mời",
+    "checkInAvailable": "Đã checkin",
+    "notCheckIn": "Chưa checkin"
   },
   "placeholder": {
     "email": "example@example.com",
@@ -213,6 +233,10 @@
     "description": "Bạn có chắc chắn là bạn muốn xóa nó không?",
     "titleCompany": "Xoá thông tin công ty",
     "titleEvent": "Xoá sự kiện"
+  },
+  "checkInPopover": {
+    "title": "Check in",
+    "description": "Bạn có chắc checkin cho khách mời "
   },
   "callOut": {
     "totalEvent": "Tổng sự kiện",

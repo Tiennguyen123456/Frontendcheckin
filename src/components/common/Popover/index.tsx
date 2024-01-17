@@ -1,3 +1,4 @@
+import { ACTION } from "@/constants/enum";
 import { StyledPopover, StyledPrimaryButton, StyledSecondaryButton } from "@/styles/commons";
 import theme, { themeColors } from "@/theme/theme";
 import styled from "@emotion/styled";
@@ -11,9 +12,11 @@ type Props = {
   mainTitle: string;
   subtitle: string;
   icon: ReactNode;
+  color?: string;
+  buttonTitle?: string;
 };
 
-export default function ConfirmPopover({ id, onConfirm, mainTitle, subtitle, icon }: Props) {
+export default function ConfirmPopover({ id, onConfirm, mainTitle, subtitle, icon, color, buttonTitle }: Props) {
   const translation = useTranslations();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -65,16 +68,19 @@ export default function ConfirmPopover({ id, onConfirm, mainTitle, subtitle, ico
           <StyledPopoverTitle>{mainTitle}</StyledPopoverTitle>
           <StyledPopoverDescription>{subtitle}</StyledPopoverDescription>
           <StyledPopoverActions>
-            <StyledCancelButton onClick={handleCloseDeletePopover} sx={{ color: themeColors.colors.redD32 }}>
+            <StyledCancelButton
+              onClick={handleCloseDeletePopover}
+              sx={buttonTitle != null ? { color: themeColors.colors.gray5C6 } : { color: themeColors.colors.redD32 }}
+            >
               {translation("action.cancel")}
             </StyledCancelButton>
             <StyledDeleteButton
               loading={loadingDelete}
               loadingPosition="start"
-              sx={{ backgroundColor: themeColors.colors.redD32 }}
+              sx={{ backgroundColor: color != null ? color : themeColors.colors.redD32 }}
               onClick={handleDelete}
             >
-              {translation("action.delete")}
+              {buttonTitle === ACTION.Approve ? translation("action.approve") : translation("action.delete")}
             </StyledDeleteButton>
           </StyledPopoverActions>
         </StyledPopoverContent>
