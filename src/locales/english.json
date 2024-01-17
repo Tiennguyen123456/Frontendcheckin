@@ -91,7 +91,14 @@
     }
   },
   "configEventPage": {
-    "title": "Config Event"
+    "title": "Config Event",
+    "configTabs": {
+      "configFields": "Configure Fields",
+      "configPrintTemplates": "Configure Print Templates",
+      "configBackground": "Configure Background",
+      "configLanguage": "Configure Language",
+      "configEvent": "Configure Event"
+    }
   },
   "permissionsPage": {
     "title": "Permissions",
@@ -204,7 +211,8 @@
     "DELETE_COMPANY_FAILED": "Delete company failed.",
     "CREATE_EVENT_FAILED": "Create event failed.",
     "UPDATE_EVENT_FAILED": "Update event failed.",
-    "DELETE_EVENT_FAILED": "Delete event failed."
+    "DELETE_EVENT_FAILED": "Delete event failed.",
+    "GET_EVENT_CONFIG_FIELDS_FAILED": "Get event config fields failed."
   },
   "successApi": {
     "CREATE_ACCOUNT_SUCCESS": "Create account success.",

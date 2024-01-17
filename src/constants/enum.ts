@@ -30,3 +30,11 @@ export enum CompanyStatus {
 export enum ACTION {
   Approve = "APPROVE",
 }
+
+export enum InputType {
+  Text = "text",
+  Checkbox = "checkbox",
+  Number = "number",
+  Select = "select",
+  Color = "color",
+}

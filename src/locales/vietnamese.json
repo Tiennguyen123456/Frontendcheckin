@@ -90,7 +90,14 @@
     }
   },
   "configEventPage": {
-    "title": "Cấu hình sự kiện"
+    "title": "Cấu hình sự kiện",
+    "configTabs": {
+      "configFields": "Cấu hình trường",
+      "configPrintTemplates": "Cấu hình mẫu in",
+      "configBackground": "Cấu hình background",
+      "configLanguage": "Cấu hình ngôn ngữ",
+      "configEvent": "Cấu hình sự kiện"
+    }
   },
   "permissionsPage": {
     "title": "Phân quyền"
@@ -203,7 +210,8 @@
     "DELETE_COMPANY_FAILED": "Xoá công ty thất bại.",
     "CREATE_EVENT_FAILED": "Tạo mới sự kiện thất bại.",
     "UPDATE_EVENT_FAILED": "Chỉnh sửa sự kiện thất bại.",
-    "DELETE_EVENT_FAILED": "Xoá sự kiện thật bại."
+    "DELETE_EVENT_FAILED": "Xoá sự kiện thật bại.",
+    "GET_EVENT_CONFIG_FIELDS_FAILED": "Lấy cấu hình trường sự kiện thất bại."
   },
   "successApi": {
     "CREATE_ACCOUNT_SUCCESS": "Tạo mới tài khoản thành công.",

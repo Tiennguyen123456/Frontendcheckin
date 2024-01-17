@@ -1,3 +1,5 @@
+import { EventConfigFieldType, EventConfigTemplateType } from "../Event";
+
 export interface IEventRes {
   id: number;
   company_id: number;
@@ -22,4 +24,15 @@ export interface IEventRes {
   updated_by: number;
   created_at: string;
   updated_at: string;
+}
+
+export interface IEventConfigFieldsRes {
+  id: number;
+  template: EventConfigTemplateType;
+  main_fields: {
+    [x: string]: EventConfigFieldType;
+  };
+  custom_fields: {
+    [x: string]: EventConfigFieldType;
+  };
 }

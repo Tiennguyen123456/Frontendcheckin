@@ -1,5 +1,6 @@
 import { ROUTERS_BREADCRUMBS, ROUTES } from "../constants/routes";
 import { AppRoutes } from "../constants/sidebar";
+import { IOption } from "../models/Select";
 import { SideBarItemType } from "../models/SideBar";
 import { checkPermission } from "../utils/common";
 
@@ -136,3 +137,16 @@ export function getAppRoutesBaseOnPermission(userPermissions: string[]) {
 
   return appBarFollowPermission;
 }
+
+export const convertOptions = (options: any) => {
+  const newOptions: IOption[] = [];
+  for (let i = 0; i < Object.keys(options).length; i++) {
+    const key = Object.keys(options)[i];
+    newOptions.push({
+      label: options[key],
+      value: key,
+    });
+  }
+
+  return newOptions;
+};

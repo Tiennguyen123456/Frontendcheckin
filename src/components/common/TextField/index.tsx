@@ -187,6 +187,7 @@ const StyledTextField = styled(TextField)`
       color: ${themeColors.colors.gray5C6};
     }
     &.Mui-disabled {
+      background-color: ${themeColors.colors.grayF8F};
       -webkit-text-fill-color: ${themeColors.colors.blackRgba38};
     }
     &.MuiInputBase-inputAdornedStart {

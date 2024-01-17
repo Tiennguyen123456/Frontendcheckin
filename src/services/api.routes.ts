@@ -31,6 +31,7 @@ const ApiRoutes = {
   getEventDetails: baseURL + "/event/",
   storeEvent: baseURL + "/event/store",
   deleteEvent: baseURL + "/event/delete/",
+  getEventConfigFields: baseURL + "/event",
 };
 
 export default ApiRoutes;

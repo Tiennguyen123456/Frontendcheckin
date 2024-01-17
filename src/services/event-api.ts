@@ -1,4 +1,4 @@
-import { IEventRes } from "@/models/api/event-api";
+import { IEventConfigFieldsRes, IEventRes } from "@/models/api/event-api";
 import { IListRes } from "@/models/Table";
 import { api } from "../configs/axios.config";
 import ApiRoutes from "./api.routes";
@@ -23,6 +23,13 @@ const eventApi = {
 
   deleteEvent: async (id: number) => {
     const response = await api.delete<IResponse<IEventRes>>(ApiRoutes.deleteEvent + id);
+    return response.data;
+  },
+
+  getEventConfigFields: async (eventId: string) => {
+    const url = ApiRoutes.getEventConfigFields + `/${eventId}/fields`;
+
+    const response = await api.get<IResponse<IEventConfigFieldsRes>>(url);
     return response.data;
   },
 };
