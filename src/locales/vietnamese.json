@@ -89,6 +89,16 @@
       "updateAt": "Ngày cập nhật"
     }
   },
+  "configEventPage": {
+    "title": "Cấu hình sự kiện",
+    "configTabs": {
+      "configFields": "Cấu hình trường",
+      "configPrintTemplates": "Cấu hình mẫu in",
+      "configBackground": "Cấu hình background",
+      "configLanguage": "Cấu hình ngôn ngữ",
+      "configEvent": "Cấu hình sự kiện"
+    }
+  },
   "permissionsPage": {
     "title": "Phân quyền"
   },
@@ -103,7 +113,8 @@
     "landingPage": "Landing page",
     "listCard": "Danh sách thiệp mời",
     "importExcel": "Tải lên dữ liệu excel",
-    "exportExcel": "Tải xuống dữ liệu excel"
+    "exportExcel": "Tải xuống dữ liệu excel",
+    "appendField": "Thêm trường"
   },
   "label": {
     "search": "Tìm kiếm",
@@ -129,7 +140,20 @@
     "eventName": "Tên sự kiện",
     "allClients": "Tổng số khách mời",
     "checkInAvailable": "Đã checkin",
-    "notCheckIn": "Chưa checkin"
+    "notCheckIn": "Chưa checkin",
+    "ordinalNumber": "STT",
+    "fieldName": "Tên trường",
+    "description": "Mô tả",
+    "showConfig": "Hiện cấu hình",
+    "configField": "Cấu hình trường",
+    "pc": "PC",
+    "table": "Table",
+    "mobile": "Mobile",
+    "pda": "PDA",
+    "display": "Hiển thị",
+    "bold": "Bold",
+    "italic": "Italic",
+    "font": "Font"
   },
   "placeholder": {
     "email": "example@example.com",
@@ -147,7 +171,9 @@
     "limitEvent": "Giới hạn sự kiện",
     "limitUser": " Giới hạn tài khoản",
     "limitCampaign": "Giới hạn chiến dịch",
-    "eventName": "Tên sự kiện"
+    "eventName": "Tên sự kiện",
+    "fieldName": "Tên trường",
+    "description": "Mô tả"
   },
   "error": {
     "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
@@ -184,7 +210,8 @@
     "DELETE_COMPANY_FAILED": "Xoá công ty thất bại.",
     "CREATE_EVENT_FAILED": "Tạo mới sự kiện thất bại.",
     "UPDATE_EVENT_FAILED": "Chỉnh sửa sự kiện thất bại.",
-    "DELETE_EVENT_FAILED": "Xoá sự kiện thật bại."
+    "DELETE_EVENT_FAILED": "Xoá sự kiện thật bại.",
+    "GET_EVENT_CONFIG_FIELDS_FAILED": "Lấy cấu hình trường sự kiện thất bại."
   },
   "successApi": {
     "CREATE_ACCOUNT_SUCCESS": "Tạo mới tài khoản thành công.",

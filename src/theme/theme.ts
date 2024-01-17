@@ -23,6 +23,7 @@ export const themeColors = {
     grayF0F: "#F0F0F0",
     grayE3E: "#E3EAEF",
     grayDCD: "#DCDCDC",
+    grayEFE: "#EFEFEF",
     orangeEF6: "#EF6C00",
     blackRgba09: "rgba(0, 0, 0, 0.09)",
     blackRgba08: "rgba(0, 0, 0, 0.08)",

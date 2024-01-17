@@ -53,12 +53,14 @@ function SelectField({
   return (
     <ThemeProvider theme={selectTheme}>
       <FormControl fullWidth variant={variant} error={error}>
-        <StyledLabel
-          className={clsx("mb-2", !readOnly && isRequired && !disabled ? "required-field" : "")}
-          id="select-label"
-        >
-          {label}
-        </StyledLabel>
+        {label && (
+          <StyledLabel
+            className={clsx("mb-2", !readOnly && isRequired && !disabled ? "required-field" : "")}
+            id="select-label"
+          >
+            {label}
+          </StyledLabel>
+        )}
 
         <StyledSelect
           labelId="select-label"
