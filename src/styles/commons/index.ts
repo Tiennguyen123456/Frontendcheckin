@@ -6,7 +6,7 @@ import { Box, Button, Chip, MenuItem, Popover } from "@mui/material";
 import Link from "next/link";
 
 export const StyledPrimaryButton = styled(LoadingButton)`
-  background-color: ${(props) => props.sx?.backgroundColor || themeColors.colors.blackRgba87};
+  background-color: ${(props: any) => props.sx?.backgroundColor || themeColors.colors.blackRgba87};
   padding: ${(props) => (props.size === "small" ? "8px 16px" : "13.5px 16px")};
 
   color: ${(props) => props.color || themeColors.colors.whiteFFF};
@@ -21,7 +21,7 @@ export const StyledPrimaryButton = styled(LoadingButton)`
     0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   &:hover {
     opacity: 0.8;
-    background-color: ${(props) => props.sx?.backgroundColor || themeColors.colors.blackRgba87};
+    background-color: ${(props: any) => props.sx?.backgroundColor || themeColors.colors.blackRgba87};
   }
   &:disabled {
     opacity: 0.6;
@@ -35,12 +35,12 @@ export const StyledPrimaryButton = styled(LoadingButton)`
 `;
 
 export const StyledSecondaryButton = styled(LoadingButton)`
-  padding: ${(props) => (props.size === "small" ? "8px 16px" : "13.5px 16px")};
-  border: 1px solid ${(props) => props.sx?.color || themeColors.colors.blackRgba87};
+  padding: ${(props: any) => (props.size === "small" ? "8px 16px" : "13.5px 16px")};
+  border: 1px solid ${(props: any) => props.sx?.color || themeColors.colors.blackRgba87};
   border-radius: 4px;
   background-color: ${themeColors.colors.whiteFFF};
 
-  color: ${(props) => props.sx?.color || themeColors.colors.blackRgba87};
+  color: ${(props: any) => props.sx?.color || themeColors.colors.blackRgba87};
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
