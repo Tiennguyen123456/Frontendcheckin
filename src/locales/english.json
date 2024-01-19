@@ -154,7 +154,8 @@
     "display": "Display",
     "bold": "Bold",
     "italic": "Italic",
-    "font": "Font"
+    "font": "Font",
+    "setting": "Setting"
   },
   "placeholder": {
     "email": "example@example.com",

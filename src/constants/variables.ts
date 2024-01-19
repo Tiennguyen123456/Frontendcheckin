@@ -6,6 +6,9 @@ export const ScreenWidth = {
   xxl: 1536,
 };
 
+export const MAX_FILE_SIZE = 5000000; // 5MB
+export const ALLOWED_FILE_TYPES = ["image/png", "image/jpeg", "image/jpg"];
+
 export const emailRegex = new RegExp(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
 export const passwordRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
 export const numberRegex = new RegExp(/^(\d+)?$/);

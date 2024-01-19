@@ -1,5 +1,7 @@
 "use client";
 import CustomIconBtn from "@/components/common/Button/CustomIconBtn";
+import ConfigBackgroundItemForm from "@/components/common/Events/ConfigBackground/ConfigItemForm";
+import ConfigEventItemForm from "@/components/common/Events/ConfigEvent/ConfigItemForm";
 import ConfigMainFieldForm from "@/components/common/Events/ConfigMainField/ConfigMainField";
 import HeadContent from "@/components/common/HeadContent";
 import TabItem from "@/components/common/Tab/TabItem";
@@ -18,6 +20,125 @@ import { toastError, toastSuccess } from "../../../../../../utils/toast";
 import { IUpdateEventConfigFields } from "../../../../../../models/api/event-api";
 
 type Props = {};
+
+const temp = [
+  {
+    title: "Config",
+    subConfigList: [
+      {
+        labelField: "Cho phép mở landing page",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Cho phép đăng ký gửi email trên landing page",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Cho phép checkin không đầu vào",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Kiểm tra check trùng",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Cho phép mở form trong landing page",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Lề trái",
+        inputType: "text",
+      },
+      {
+        labelField: "Chiều rông của box - Desktop",
+        inputType: "text",
+      },
+      {
+        labelField: "Chiều rông của box - Mobile",
+        inputType: "text",
+      },
+      {
+        labelField: "Ẩn multichoice theo form đăng ký trên landing page",
+        inputType: "text",
+      },
+    ],
+  },
+  {
+    title: "Email",
+    subConfigList: [
+      {
+        labelField: "Test",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Test2",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Test3",
+        inputType: "text",
+      },
+      {
+        labelField: "Test",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Test",
+        inputType: "checkbox",
+      },
+    ],
+  },
+  {
+    title: "Desktop",
+    subConfigList: [
+      {
+        labelField: "Test",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Test2",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Test3",
+        inputType: "text",
+      },
+      {
+        labelField: "Test",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Test",
+        inputType: "checkbox",
+      },
+    ],
+  },
+  {
+    title: "Mobile",
+    subConfigList: [
+      {
+        labelField: "Test",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Test2",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Test3",
+        inputType: "text",
+      },
+      {
+        labelField: "Test",
+        inputType: "checkbox",
+      },
+      {
+        labelField: "Test",
+        inputType: "checkbox",
+      },
+    ],
+  },
+];
 
 const EventConfigurationPage = (props: Props) => {
   // ** I18n
@@ -216,8 +337,7 @@ const EventConfigurationPage = (props: Props) => {
             {translation("configEventPage.configTabs.configBackground")}
           </AccordionSummary>
           <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit
-            leo lobortis eget.
+            <ConfigBackgroundItemForm />
           </AccordionDetails>
         </Accordion>
 
@@ -244,8 +364,9 @@ const EventConfigurationPage = (props: Props) => {
             {translation("configEventPage.configTabs.configEvent")}
           </AccordionSummary>
           <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit
-            leo lobortis eget.
+            {temp.map((item: any, index: any) => (
+              <ConfigEventItemForm key={index} temp={item} />
+            ))}
           </AccordionDetails>
         </Accordion>
       </div>
