@@ -197,7 +197,8 @@
     "requiredEventName": "Please enter your event name.",
     "invalidNumber": "Please enter valid number",
     "requiredFieldName": "Please enter field name",
-    "requiredDescription": "Please enter description"
+    "requiredDescription": "Please enter description",
+    "duplicateFieldName": "Field name is duplicated"
   },
   "errorApi": {
     "LOGIN_FAILED": "Login failed.",

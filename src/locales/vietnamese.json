@@ -196,7 +196,8 @@
     "requiredEventName": "Vui lòng nhập tên sự kiện.",
     "invalidNumber": "Vui lòng nhập số hợp lệ",
     "requiredFieldName": "Vui lòng nhập tên trường",
-    "requiredDescription": "Vui lòng nhập mô tả"
+    "requiredDescription": "Vui lòng nhập mô tả",
+    "duplicateFieldName": "Field name is duplicated"
   },
   "errorApi": {
     "LOGIN_FAILED": "Đăng nhập thất bại.",

@@ -6,7 +6,7 @@ import { Collapse, IconButton } from "@mui/material";
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { Control, Controller, FieldErrors, UseFieldArrayRemove } from "react-hook-form";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import { DeviceType, InputType } from "../../../../constants/enum";
 import { convertOptions } from "../../../../helpers/funcs";
 import { EventConfigTemplateType } from "../../../../models/Event";
@@ -15,10 +15,10 @@ import { useAppSelector } from "../../../../redux/root/hooks";
 import { themeColors } from "../../../../theme/theme";
 import CustomCheckbox from "../../Checkbox";
 import CustomColorPicker from "../../Colorpicker";
+import ConfirmPopover from "../../Popover";
 import SelectField from "../../Select";
 import Input from "../../TextField";
 import { FormConfigItemValue } from "./ConfigMainField";
-import ConfirmPopover from "../../Popover";
 
 type Props = {
   control: Control<FormConfigItemValue, any>;

@@ -17,6 +17,7 @@ const { yupResolver } = require("@hookform/resolvers/yup");
 
 export type FormConfigItemValue = {
   configItems: EventConfigFieldType[];
+  isDuplicate: boolean;
 };
 
 type Props = {
@@ -104,6 +105,26 @@ const ConfigMainFieldForm = ({
           }),
         }),
       ),
+      isDuplicate: yup.boolean().test("is-duplicate", function (value, { parent, resolve, schema }) {
+        const configItems: any = parent.configItems;
+
+        const indexDuplicated = handleCheckDuplicateEventConfigFields(configItems);
+        if (indexDuplicated.length > 1) {
+          const error1 = new yup.ValidationError(
+            translation("error.duplicateFieldName"),
+            "",
+            `configItems[${indexDuplicated[0]}].field`,
+          );
+          const error2 = new yup.ValidationError(
+            translation("error.duplicateFieldName"),
+            "",
+            `configItems[${indexDuplicated[1]}].field`,
+          );
+
+          return new yup.ValidationError([error1, error2]);
+        }
+        return true;
+      }),
     });
 
     return schema;
@@ -122,6 +143,7 @@ const ConfigMainFieldForm = ({
       configItems: [],
     },
   });
+  console.log("errors: ", errors);
 
   const {
     fields: configItemsFields,
@@ -204,6 +226,19 @@ const ConfigMainFieldForm = ({
         toastError(translation("errorApi.DELETE_EVENT_CONFIG_FIELD_FAILED"));
       }
     }
+  };
+
+  const handleCheckDuplicateEventConfigFields = (array: EventConfigFieldType[]) => {
+    for (let i = 0; i < array.length; i++) {
+      const element = array[i];
+      for (let j = i + 1; j < array.length; j++) {
+        const tempEl = array[j];
+        if (element.field && tempEl.field && element.field === tempEl.field) {
+          return [i, j];
+        }
+      }
+    }
+    return [-1];
   };
 
   useEffect(() => {
