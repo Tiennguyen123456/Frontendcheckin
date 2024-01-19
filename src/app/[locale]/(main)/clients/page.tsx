@@ -378,9 +378,11 @@ const EventsPage = (props: Props) => {
             </StyledSecondaryButton>
           </div>
         </div>
-        <div className="flex gap-x-6">
+        <div className="flex mb-5 mt-2 items-center">
           <StyledBadge badgeContent={4}>{translation("label.allClients")}</StyledBadge>
+          <div className="w-3 h-[1px] bg-gray-500 ml-6 mr-4"></div>
           <StyledBadge badgeContent={4}>{translation("label.checkInAvailable")}</StyledBadge>
+          <div className="w-3 h-[1px] bg-gray-500 ml-6 mr-4"></div>
           <StyledBadge badgeContent={4}>{translation("label.notCheckIn")}</StyledBadge>
         </div>
 

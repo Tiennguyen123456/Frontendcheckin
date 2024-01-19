@@ -81,10 +81,7 @@ const EventsPage = (props: Props) => {
       flex: 1,
       renderCell: ({ row }) => (
         <div>
-          <StyledLink href={ROUTES.CLIENTS} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <Box sx={{ columnGap: "6px", marginRight: "4px" }}>{row?.name || translation("label.notAvailable")}</Box>
-            <AccountBoxIcon />
-          </StyledLink>
+          <Box sx={{ columnGap: "6px", marginRight: "4px" }}>{row?.name || translation("label.notAvailable")}</Box>
         </div>
       ),
     },
@@ -147,7 +144,7 @@ const EventsPage = (props: Props) => {
           <IconButton aria-label="edit" onClick={() => handleClickEdit(row.id)}>
             <EditIcon sx={{ color: themeColors.colors.blue219 }} />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={() => routerPushWithLocale(ROUTES.CLIENTS)}>
             <GroupsIcon />
           </IconButton>
           <ConfirmPopover

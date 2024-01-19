@@ -1,3 +1,6 @@
+import { ALLOWED_FILE_TYPES } from "@/constants/variables";
+import clsx, { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 import { AccountStatus, CompanyStatus, EventStatus } from "../constants/enum";
 import { locales } from "../i18n-configurations/config";
 
@@ -89,4 +92,12 @@ export function removeLocaleFromPathname(pathname: string) {
   }
 
   return newPath;
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export function validateFileType(file: File) {
+  return ALLOWED_FILE_TYPES.includes(file.type);
 }
